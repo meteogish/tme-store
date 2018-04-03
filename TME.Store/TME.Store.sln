@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TME.Store.Android", "TME.Store\TME.Store.Android\TME.Store.Android.csproj", "{C1DCBC74-7FF2-4602-89F3-44590099743C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TME.Store.Android", "TME.Store.Android\TME.Store.Android.csproj", "{C1DCBC74-7FF2-4602-89F3-44590099743C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TME.Store", "TME.Store\TME.Store\TME.Store.csproj", "{69BD3162-A104-4C8C-B2E4-FBD3BA9E1BF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TME.Store", "TME.Store\TME.Store.csproj", "{69BD3162-A104-4C8C-B2E4-FBD3BA9E1BF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tmeapiwrapper", "TME.Store\tmeapiwrapper\tmeapiwrapper.csproj", "{0FCF8955-0B1B-4060-B26A-1A32314FD3C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tmeapiwrapper", "tmeapiwrapper\tmeapiwrapper.csproj", "{0FCF8955-0B1B-4060-B26A-1A32314FD3C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
