@@ -52,5 +52,42 @@ namespace tmeapiwrapper
 
             return JsonConvert.DeserializeObject<RootObjectResponse>(reply);
         }
+
+
+
+
+        public RootObjectResponse GetCategories(string country, string language, int CategoryId,Boolean Tree )
+        {
+            var url = @"https://api.tme.eu/Products/GetCategories.json";
+            var prefixRequest = "POST" + "&" + WebUtility.UrlEncode(@url) + "&";
+            var suffixRequest = "";
+            var values = new List<KeyValuePair<string, string>>();
+
+            values.Add(new KeyValuePair<string, string>("Language", language));
+
+           if(CategoryId!=-1)
+                values.Add(new KeyValuePair<string, string>("CategoryId", CategoryId.ToString()));
+            values.Add(new KeyValuePair<string, string>("Token", _token));
+            values.Add(new KeyValuePair<string, string>("Country", country));
+          //  values.Add(new KeyValuePair<string, string>("Tree", Tree.ToString()));
+
+
+            foreach (var el in values.OrderBy(x => x.Key))
+            {
+
+                suffixRequest += suffixRequest.Length > 1 ? WebUtility.UrlEncode("&" + WebUtility.UrlEncode(el.Key) + "=" + WebUtility.UrlEncode(el.Value)) : WebUtility.UrlEncode(WebUtility.UrlEncode(el.Key) + "=" + WebUtility.UrlEncode(el.Value));
+
+            }
+
+
+            var reply = this.SendPostRequest(url, values, Utlis.CreateToken(prefixRequest + suffixRequest, _secret));
+
+            return JsonConvert.DeserializeObject<RootObjectResponse>(reply);
+        }
+
+
     }
+
+
+
 }

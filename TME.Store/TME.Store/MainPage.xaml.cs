@@ -21,6 +21,7 @@ namespace TME.Store
 			InitializeComponent();
 		    BindingContext = this;
             GetStocks(secret, token);
+            GetCategories(secret, token);
 		}
 
 	    private void GetStocks(string secret, string token)
@@ -41,5 +42,23 @@ namespace TME.Store
 	        }
 
 	    }
-	}
+
+        private void GetCategories(string secret, string token)
+        {
+            try
+            {
+                ProductsWrapper test = new ProductsWrapper(secret, token);
+
+                RootObjectResponse rootResponse = test.GetCategories("PL", "EN", -1, true);
+
+                string s = rootResponse.Data.ToString();
+                var castTest = JsonConvert.DeserializeObject<ProductGetCategoriesResponseData>(s);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+
+        }
+    }
 }
