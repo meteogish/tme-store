@@ -27,8 +27,14 @@ namespace tmeapiwrapper
                     values.Add(new KeyValuePair<string, string>("ApiSignature", msg));
                     FormUrlEncodedContent content = new FormUrlEncodedContent(values);
 
-                    // Post data
-                    var result = client.PostAsync(url, content).Result;
+                foreach (KeyValuePair<string,string> Item in values){
+
+                    System.Diagnostics.Debug.WriteLine($"{Item.Key}:"+$"{Item.Value}");
+               }
+
+
+                // Post data
+                var result = client.PostAsync(url, content).Result;
 
                     // Access content as stream which you can read into some string
                     var res = result.Content.ReadAsStringAsync();
