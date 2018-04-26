@@ -8,6 +8,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using TME.Store.Registrations;
+using Autofac;
+using TME.Domain.Components;
 
 namespace TME.Store.Droid
 {
@@ -20,15 +23,13 @@ namespace TME.Store.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
-            string fullSecret;
-            AssetManager assets = this.Assets;
-            using (StreamReader sr = new StreamReader(assets.Open("Secret.txt")))
-            {
-                fullSecret = sr.ReadToEnd();
-            }
-            string[] parts = fullSecret.Split('|');
             global::Xamarin.Forms.Forms.Init(this, bundle);
-            LoadApplication(new App(parts[0], parts[1]));
+
+            ContainerBuilder builder = Factory.GetRegistrations();
+            IConfigurationProvider configuration = new AppConfigurationProvider(this.Assets);
+            builder.RegisterInstance(configuration);
+
+            LoadApplication(new App(builder));
         }
     }
 }

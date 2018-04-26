@@ -1,19 +1,23 @@
-﻿using System;
+﻿using Autofac;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using TME.Store.Registrations;
+using TME.Store.Views;
 using Xamarin.Forms;
 
 namespace TME.Store
 {
 	public partial class App : Application
 	{
-		public App (string secret, string token)
+        public static IContainer Container { get; private set; }
+
+		public App (ContainerBuilder builder)
 		{
 			InitializeComponent();
-
-			MainPage = new TME.Store.MainPage(secret, token);
+            BuildContainer(builder);
+			MainPage = new ProductsPage();
 		}
 
 		protected override void OnStart ()
@@ -30,5 +34,11 @@ namespace TME.Store
 		{
 			// Handle when your app resumes
 		}
+
+        private void BuildContainer(ContainerBuilder builder)
+        {
+            builder.RegisterModule<ViewModelsModule>();
+            Container = builder.Build();
+        }
 	}
 }

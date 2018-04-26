@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TME.Domain\TME.Domain.csproj" />
+    <ProjectReference Include="..\TME.Store.Api\TME.Store.Api.csproj" />
+    <ProjectReference Include="..\TME.Store\TME.Store.csproj" />
+  </ItemGroup>
+
+</Project>
