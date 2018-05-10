@@ -13,9 +13,12 @@ namespace TME.Store.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ProductsPage : ContentPage
 	{
-		public ProductsPage ()
+		public ProductsPage (List<String> symbols)
 		{
 			InitializeComponent ();
+            ProductsViewModel productsViewModel = App.Container.Resolve<ProductsViewModel>();
+            productsViewModel.LoadProducts(symbols);
+            BindingContext = productsViewModel;
         }
 	}
 }
