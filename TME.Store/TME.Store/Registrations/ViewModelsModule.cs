@@ -12,7 +12,7 @@ namespace TME.Store.Registrations
         {
             base.Load(builder);
             //Register all ViewModels here
-            builder.RegisterType<ProductsViewModels>();
+            builder.RegisterType<ProductsViewModel>();
         }
     }
 }

@@ -16,9 +16,6 @@ namespace TME.Store.Views
 		public ProductsPage ()
 		{
 			InitializeComponent ();
-
-            BindingContext = App.Container.Resolve<ProductsViewModels>();
-
         }
 	}
 }

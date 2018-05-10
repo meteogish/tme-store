@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TME.Store.Views.ProductListView">
+  <ContentView.Content>
+        <ListView ItemsSource="{Binding Items}"  HasUnevenRows="true" BackgroundColor="White" Margin="3" >
+            <ListView.ItemTemplate  >
+                <DataTemplate >
+                    <ViewCell>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="32" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="15" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30*"/>
+                                <ColumnDefinition Width="60*"/>
+                                <ColumnDefinition Width="20*"/>
+                            </Grid.ColumnDefinitions>
+
+
+                            <BoxView Grid.Row="0" Grid.ColumnSpan="3" BackgroundColor="#3366FF"/>
+                            <Label  HorizontalOptions="StartAndExpand" Text="{Binding Symbol}" Grid.Row="0" Grid.ColumnSpan="3" FontSize="Medium" Margin="6,2,6,2" TextColor="White" FontAttributes="Bold"/>
+
+
+                            <Image Scale="1.0" Source="{Binding Thumbnail}" Grid.Row="1" Grid.RowSpan="2"/>
+                            <Label  Text="{Binding Description}" FontSize="Small" FontAttributes="Italic" VerticalTextAlignment="End" TextColor="Black" Grid.Row="1" Grid.Column="1"/>
+                            <Label  Text="{Binding Producer}" FontSize="Small" FontAttributes="Bold" VerticalTextAlignment="Start" TextColor="Black" Grid.Row="2" Grid.Column="1"/>
+
+                            <Label  Text="200zl" FontSize="Large" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="End" HorizontalTextAlignment="Center" Grid.Row="1" Grid.Column="2"/>
+                            <Label  Text="5 szt." FontSize="Small" FontAttributes="Italic" TextColor="DarkGray" VerticalTextAlignment="Start" HorizontalTextAlignment="Center" Grid.Row="2" Grid.Column="2"/>
+
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentView.Content>
+</ContentView>

@@ -2,46 +2,28 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TME.Store.Views.ProductsPage"
+             xmlns:views="clr-namespace:TME.Store.Views"
    
              >
-
-    <ContentPage.Content  >
-
-        <ListView ItemsSource="{Binding Items}"  HasUnevenRows="true" BackgroundColor="White" Margin="3,3,3,3" >
-                <ListView.ItemTemplate  >
-                    <DataTemplate >
-                        <ViewCell    >
-
-                      
-                            <StackLayout BackgroundColor="White" Padding="10" Orientation="Vertical" >
-                            <StackLayout BackgroundColor="DarkRed">
-                                <Label  HorizontalOptions="Start" Text="{Binding Description}" FontSize="Large" TextColor="White" FontAttributes="Bold"/>
-                            </StackLayout>
-                              
-                               
-                            <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="10">
-                                <Label  BackgroundColor="Beige" HeightRequest="100" WidthRequest="100" />
-                               
-                                <StackLayout Orientation="Vertical" Padding="5">
-                                    <Label  Text="{Binding Category}" FontSize="Medium" FontAttributes="Bold" TextColor="Black" />
-                                    <Label  Text="{Binding Symbol}" FontSize="Small" FontAttributes="Italic" TextColor="Black" />
-                                    <Label  Text="{Binding Producer}" FontSize="Small" FontAttributes="Bold" TextColor="Black" />
-                                </StackLayout>
-
-                                <StackLayout Orientation="Vertical" Padding="5" HorizontalOptions="EndAndExpand">
-                                    <Label  Text="Price" FontSize="Medium" FontAttributes="Bold" TextColor="DarkGray" />
-                                    <Label  Text="{Binding  Unit }" FontSize="Small" FontAttributes="Italic" TextColor="DarkGray" />
-                                </StackLayout>
-                                
-                            </StackLayout>
-                        </StackLayout>
-                        
-                        </ViewCell>
-
-
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+   
+            <StackLayout Grid.Row="0" Grid.Column="0">
+                <SearchBar Placeholder="Szukaj produktu..."          
+                />
+            </StackLayout>
+            
+            <views:ProductListView Grid.Row="1" Grid.Column="0"/> 
         
+        </Grid>
     </ContentPage.Content>
+    
 </ContentPage>

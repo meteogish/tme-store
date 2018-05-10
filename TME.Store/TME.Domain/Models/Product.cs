@@ -1,4 +1,6 @@
-﻿namespace TME.Domain.Models
+﻿using System;
+
+namespace TME.Domain.Models
 {
     public class Product
     {
@@ -10,7 +12,7 @@
         public string CategoryId { get; private set; }
         public string Category { get; private set; }
         public string Photo { get; private set; }
-        public string Thumbnail { get; private set; }
+        public Uri Thumbnail { get; private set; }
         public float Weight { get; private set; }
         public int SuppliedAmount { get; private set; }
         public int MinAmount { get; private set; }
@@ -48,7 +50,7 @@
             this.CategoryId = CategoryId;
             this.Category = Category;
             this.Photo = Photo;
-            this.Thumbnail = Thumbnail;
+            this.Thumbnail = new Uri("https:"+Thumbnail);
             this.Weight = Weight;
             this.SuppliedAmount = SuppliedAmount;
             this.MinAmount = MinAmount;
