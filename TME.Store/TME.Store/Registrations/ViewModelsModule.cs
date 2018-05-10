@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using TME.Store.ViewModels;
+using Xamarin.Forms;
 
 namespace TME.Store.Registrations
 {
@@ -13,6 +14,11 @@ namespace TME.Store.Registrations
             base.Load(builder);
             //Register all ViewModels here
             builder.RegisterType<ProductsViewModel>();
+            builder.Register(ctx =>
+                {
+                    return Application.Current.MainPage.Navigation;
+                }
+            ).As<INavigation>();
         }
     }
 }

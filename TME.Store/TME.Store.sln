@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TME.Domain", "TME.Domain\TM
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TME.Store.Api", "TME.Store.Api\TME.Store.Api.csproj", "{1DC1494C-D4DC-46F6-96D6-A9A8D507D20F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TME.Store.Registrations", "TME.Store.Registrations\TME.Store.Registrations.csproj", "{08C3CA31-1B96-4043-8626-6FBA99F8C084}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TME.Store.Registrations", "TME.Store.Registrations\TME.Store.Registrations.csproj", "{08C3CA31-1B96-4043-8626-6FBA99F8C084}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

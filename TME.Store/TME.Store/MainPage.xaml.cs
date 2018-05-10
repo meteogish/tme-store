@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using TME.Domain.Models;
+using TME.Store.Views;
 using Xamarin.Forms;
 using TME.Domain.Components;
 using Autofac;
