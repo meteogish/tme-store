@@ -3,6 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TME.Store.Views.ProductListView">
   <ContentView.Content>
+        <StackLayout>
+            <ActivityIndicator IsVisible="{Binding IsBusy}" 
+            Color="DarkCyan" 
+            IsRunning="{Binding IsBusy}"
+             BackgroundColor="White"
+              VerticalOptions="CenterAndExpand"
+              HorizontalOptions="FillAndExpand"
+               HeightRequest="150"
+               WidthRequest="150"
+           />
+       
+        
         <ListView ItemsSource="{Binding Items}"  HasUnevenRows="true" BackgroundColor="White" Margin="3" >
             <ListView.ItemTemplate  >
                 <DataTemplate >
@@ -31,11 +43,12 @@
 
                             <Label  Text="200zl" FontSize="Large" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="End" HorizontalTextAlignment="Center" Grid.Row="1" Grid.Column="2"/>
                             <Label  Text="5 szt." FontSize="Small" FontAttributes="Italic" TextColor="DarkGray" VerticalTextAlignment="Start" HorizontalTextAlignment="Center" Grid.Row="2" Grid.Column="2"/>
-
+                           
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        </StackLayout>
     </ContentView.Content>
 </ContentView>

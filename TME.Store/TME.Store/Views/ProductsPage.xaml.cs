@@ -17,8 +17,8 @@ namespace TME.Store.Views
 		{
 			InitializeComponent ();
             ProductsViewModel productsViewModel = App.Container.Resolve<ProductsViewModel>();
-            productsViewModel.LoadProducts(symbols);
             BindingContext = productsViewModel;
+            productsViewModel.LoadProducts(symbols);
         }
 	}
 }

@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TME.Store.Views.ProductsPage"
              xmlns:views="clr-namespace:TME.Store.Views"
-   
+             
              >
     <ContentPage.Content>
-        <Grid>
+       <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="45" />
                 <RowDefinition Height="*" />
