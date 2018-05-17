@@ -8,14 +8,14 @@
     <OutputType>Library</OutputType>
     <RootNamespace>TME.Store.Droid</RootNamespace>
     <AssemblyName>TME.Store.Android</AssemblyName>
-    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
+    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -83,9 +83,13 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TME.Domain\TME.Domain.csproj">
-      <Project>{F0E22D9E-4AD6-41D8-B940-34819316BF01}</Project>
-      <Name>TME.Domain</Name>
+    <ProjectReference Include="..\TME.Api.Domain\TME.Api.Domain.csproj">
+      <Project>{e16963d9-937b-45ce-9245-7995ba1b832c}</Project>
+      <Name>TME.Api.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TME.Store.Domain\TME.Store.Domain.csproj">
+      <Project>{cb1530e1-68f5-4b8a-b1c1-7289ca33f3a4}</Project>
+      <Name>TME.Store.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\TME.Store.Registrations\TME.Store.Registrations.csproj">
       <Project>{08c3ca31-1b96-4043-8626-6fba99f8c084}</Project>

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Text;
 using System.Windows.Input;
-using TME.Domain.Components;
-using TME.Domain.Models;
+using TME.Store.Domain.Components;
+using TME.Store.Domain.Models;
 using TME.Store.Views;
 using Xamarin.Forms;
 
@@ -30,7 +27,7 @@ namespace TME.Store.ViewModels
         }
         public void LoadProducts(List<string> symbols)
         {
-            Items = new ObservableCollection<Product>(_productsProvider.GetProducts(symbols));
+            Items = new ObservableCollection<Product>((_productsProvider.GetProducts(symbols)).Products);
         }
 
         public ProductsViewModel(IProductsProvider productsProvider, INavigation navigation)

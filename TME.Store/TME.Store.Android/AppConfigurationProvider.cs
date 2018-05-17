@@ -1,22 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
+﻿using System.IO;
 using Android.Content.Res;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+using TME.Api.Domain.Models;
 using TME.Domain.Components;
-using TME.Domain.Models;
 
 namespace TME.Store.Droid
 {
-    public class AppConfigurationProvider : IConfigurationProvider
+    public class AppConfigurationProvider : IApiConfigurationProvider
     {
         public ApiConfiguration ApiConfiguration { get; private set; }
 
@@ -28,7 +17,7 @@ namespace TME.Store.Droid
                 fullSecret = sr.ReadToEnd();
             }
             string[] parts = fullSecret.Split('|');
-            ApiConfiguration = new ApiConfiguration(parts[0], parts[1], "PL", "EN");
+            ApiConfiguration = new ApiConfiguration(parts[0], parts[1], "PL", "PLN", "EN");
         }
     }
 }

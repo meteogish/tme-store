@@ -1,9 +1,6 @@
 ﻿using Autofac;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using TME.Domain.Components;
-using TME.Store.Api;
+using TME.Api.Contracts;
+using TME.Api.Domain.Components;
 
 namespace TME.Store.Registrations.Modules
 {
@@ -13,28 +10,40 @@ namespace TME.Store.Registrations.Modules
         {
             base.Load(builder);
 
+            builder.RegisterType<ServiceBase>()
+              .As<IRequestService>()
+              .SingleInstance();
+
             builder.RegisterType<ProductsWrapper>()
-                .As<ICategoriesProvider>()
+                .As<IApiSymbolsProvider>()
                 .SingleInstance();
 
             builder.RegisterType<ProductsWrapper>()
-                .As<ISearchService>()
+                .As<IApiCategoriesProvider>()
                 .SingleInstance();
 
             builder.RegisterType<ProductsWrapper>()
-               .As<IStocksProvider>()
+                .As<IApiSearchService>()
+                .SingleInstance();
+
+            builder.RegisterType<ProductsWrapper>()
+               .As<IApiStocksProvider>()
                .SingleInstance();
 
             builder.RegisterType<ProductsWrapper>()
-               .As<IProductsProvider>()
+               .As<IApiProductsProvider>()
                .SingleInstance();
 
+            builder.RegisterType<ProductsWrapper>()
+               .As<IApiPricesProvider>()
+               .SingleInstance();
 
             builder.RegisterType<ProductsWrapper>()
-               .As<IPricesProvider>()
-               .SingleInstance();
+             .As<IApiProductFilesProvider>()
+             .SingleInstance();
+
             builder.RegisterType<ProductsWrapper>()
-             .As<IProductFilesProvider>()
+             .As<IApiProductPricesAndStocksProvider>()
              .SingleInstance();
         }
     }
