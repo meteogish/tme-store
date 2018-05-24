@@ -13,46 +13,47 @@ namespace TME.Store.Logic
     {
         private IApiSearchService _apiSearchService;
         private IApiPricesProvider _apiPricesProvider;
+        private IApiStocksProvider _apiStocksProvider;
 
         public SearchService(IApiSearchService apiSearchService,
-                                IApiPricesProvider apiPricesProvider)
+                                IApiPricesProvider apiPricesProvider,
+                                    IApiStocksProvider apiStocksProvider)
         {
             _apiSearchService = apiSearchService;
             _apiPricesProvider = apiPricesProvider;
+            _apiStocksProvider = apiStocksProvider;
         }
 
         public ProductsResult GetSearchedProducts(string symbol)
         {
             List<ApiSearchProduct> apiProducts = _apiSearchService.Search(symbol).ProductList;
             List<String> listOfSymbols = apiProducts.Select(s => s.Symbol).ToList();
+            List<ApiStock> apiStockResult = _apiStocksProvider.GetStocks(listOfSymbols.Skip(10).Take(10).ToList());
 
+            ApiPriceResult<ApiProductPrice> priceResult = _apiPricesProvider.GetPrices(listOfSymbols.Skip(10).Take(10).ToList());
 
-            ApiPriceResult priceResult = _apiPricesProvider.GetPrices(listOfSymbols);
+            List<Product> products = (from apiProduct in apiProducts
+                                      join apiProductPrice in priceResult.ProductList on apiProduct.Symbol equals apiProductPrice.Symbol
+                                      join apiStock in apiStockResult on apiProduct.Symbol equals apiStock.Symbol
+                                      select new Product(
+                                                apiProduct.Symbol,
+                                                apiProduct.Producer,
+                                                apiProduct.Description,
+                                                apiProduct.Category,
+                                                apiProduct.Unit,
+                                                apiProduct.Photo,
+                                                apiProduct.Thumbnail,
 
-            List<Product> products = apiProducts
-               .Join<ApiProduct, ApiProductPrice, string, Product>(
-                       priceResult.ProductList,
-                       prod => prod.Symbol,
-                       prodPrice => prodPrice.Symbol,
-                       (apiProd, apiProdPrice) =>
-                           new Product(
-                               apiProd.Symbol,
-                               apiProd.Producer,
-                               apiProd.Description,
-                               apiProd.Category,
-                               apiProd.Unit,
-                               apiProd.Photo,
-                               apiProd.Thumbnail,
-                               new ProductPrice(
-                                   apiProdPrice.VatRate,
-                                   apiProdPrice.VatType,
-                                   apiProdPrice.PriceList
-                                               .Select(p =>
-                                                       new PriceOffer(
-                                                       p.Ammount,
-                                                       p.PriceValue,
-                                                       p.Special)).ToList()))
-                       ).ToList();
+                                                apiStock.Amount,
+                                                 new ProductPrice(
+                                                    apiProductPrice.VatRate,
+                                                    apiProductPrice.VatType,
+                                                    apiProductPrice.PriceList.Select(p =>
+                                                                        new PriceOffer(
+                                                                        p.Ammount,
+                                                                        p.PriceValue,
+                                                                        p.Special)).ToList())))
+                                              .ToList();
 
             return new ProductsResult(priceResult.PriceType, priceResult.Currency, products);
         }

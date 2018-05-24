@@ -13,7 +13,8 @@ namespace TME.Store.Domain.Models
         public string Unit { get; private set; }
         public string Photo { get; private set; }
         public string Thumbnail { get; private set; }
-        public ProductPrice ProductPrice { get; private set; }
+        public int Amount { get; private set; }     
+        public ProductPrice ProductPrice { get; }
 
         public Product(string symbol,
                         string producer,
@@ -22,7 +23,9 @@ namespace TME.Store.Domain.Models
                         string unit,
                         string thumbnail,
                         string photo,
-                        ProductPrice price)
+                        int amount,
+                        ProductPrice price
+                       )
         {
             Symbol = symbol;
             Producer = producer;

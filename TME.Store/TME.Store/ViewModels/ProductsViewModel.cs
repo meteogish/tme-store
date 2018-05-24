@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -15,6 +16,7 @@ namespace TME.Store.ViewModels
     {
 
         private ObservableCollection<Product> products;
+        private string currency;
         private IProductsProvider _productsProvider;
         private ISearchService _searchService;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -52,6 +54,19 @@ namespace TME.Store.ViewModels
             }
         }
 
+
+        public String Currency
+        {
+            get { return currency; }
+            set
+            {
+                currency = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
@@ -70,7 +85,9 @@ namespace TME.Store.ViewModels
 
             await Task.Run(() =>
             {
-                Items = new ObservableCollection<Product>((_searchService.GetSearchedProducts(symbols)).Products);
+                ProductsResult productsResult = _searchService.GetSearchedProducts(symbols);
+                Items = new ObservableCollection<Product>(productsResult.Products);
+                Currency = productsResult.Currency;
 
             });
 
