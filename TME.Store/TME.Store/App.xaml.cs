@@ -20,7 +20,7 @@ namespace TME.Store
 
             NavigationPage navigationPage = new NavigationPage();
             MainPage = navigationPage;
-            ProductsPage root = new Views.ProductsPage(new List<string>() { "2W08G-E4/51" });
+            ProductsPage root = new Views.ProductsPage("2W08G-E4/51" );
             navigationPage.PushAsync(root).Wait();   
            
         }

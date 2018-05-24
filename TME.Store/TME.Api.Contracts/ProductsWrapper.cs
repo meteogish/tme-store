@@ -13,7 +13,7 @@ using TME.Api.Contracts.Logic;
 namespace TME.Api.Contracts
 {
     public class ProductsWrapper : IApiSymbolsProvider, IApiProductsProvider, IApiStocksProvider, IApiCategoriesProvider,
-        IApiSearchService, IApiPricesProvider, IApiProductFilesProvider, IApiProductPricesAndStocksProvider
+        IApiSearchService, IApiPricesProvider, IApiProductFilesProvider
     {
         private const string Get_Stocks_Url = @"https://api.tme.eu/Products/GetStocks.json";
         private const string Get_Categories_Url = @"https://api.tme.eu/Products/GetCategories.json";
@@ -168,19 +168,6 @@ namespace TME.Api.Contracts
             RootObjectResponse root = _requestService.SendPostRequest(Get_ProductFiles_Url, values);
 
             return ((JObject)root.Data).GetValue("ProductList").ToObject<List<ApiProductFiles>>();
-        }
-
-        public List<ApiProductListForPriceAndStock> GetPricesAndStocks(List<string> SymbolList)
-        {
-            List<KeyValuePair<string, string>> values = CombineValues(SymbolList);
-            values.Add(new KeyValuePair<string, string>("Currency", _apiConfiguration.Currency));
-
-            string apiSignature = CreateApiSignature(Get_PricesAndStocks, values);
-            values.Add(new KeyValuePair<string, string>("ApiSignature", apiSignature));
-
-            RootObjectResponse root = _requestService.SendPostRequest(Get_PricesAndStocks, values);
-
-            return ((JObject)root.Data).GetValue("ProductList").ToObject<List<ApiProductListForPriceAndStock>>(); ;
         }
 
 

@@ -16,7 +16,7 @@ namespace TME.Store.ViewModels
 
         private ObservableCollection<Product> products;
         private IProductsProvider _productsProvider;
-
+        private ISearchService _searchService;
         public event PropertyChangedEventHandler PropertyChanged;
 
         private bool isBusy=false;
@@ -34,6 +34,13 @@ namespace TME.Store.ViewModels
         }
 
         public ICommand MyCommand { private set; get; }
+
+        private ICommand searchCommand;
+
+        public ICommand SearchCommand {
+            get { return searchCommand; }
+            set { searchCommand = value;}
+        }
 
         public ObservableCollection<Product> Items
         {
@@ -57,27 +64,27 @@ namespace TME.Store.ViewModels
         }*/
 
 
-        public async void LoadProducts(List<string> symbols)
+        public async void LoadProducts(string symbols)
         {
            this.IsBusy = true;
 
             await Task.Run(() =>
             {
-                Items = new ObservableCollection<Product>((_productsProvider.GetProducts(symbols)).Products);
+                Items = new ObservableCollection<Product>((_searchService.GetSearchedProducts(symbols)).Products);
 
             });
 
             this.IsBusy = false;
         }
 
-        public ProductsViewModel(IProductsProvider productsProvider, INavigation navigation)
+        public ProductsViewModel(ISearchService searchService, INavigation navigation)
         {
-            _productsProvider = productsProvider;
-            MyCommand = new Command(
-           execute: () =>
-           {
-               navigation.PushAsync(new ProductsPage(new List<string>() { "1WAT-LED-LIGHT", "3CHAZ-LO", "2W08G-E4/51", "BAT-123/EG-B2", "BAT-23A/DR-B2" }));
-           });
+            _searchService = searchService;
+            SearchCommand = new Command<string>((text) =>
+            {
+                navigation.PushAsync(new ProductsPage(text));
+            });
+            
         }
     }
 }
