@@ -41,10 +41,10 @@
                             <Label  Text="{Binding Description}" FontSize="Small" FontAttributes="Italic" VerticalTextAlignment="End" TextColor="Black" Grid.Row="1" Grid.Column="1"/>
                             <Label  Text="{Binding Producer}" FontSize="Small" FontAttributes="Bold" VerticalTextAlignment="Start" TextColor="Black" Grid.Row="2" Grid.Column="1"/>
 
-                            <Label  Text="200zl" FontSize="Large" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="End" HorizontalTextAlignment="Center" Grid.Row="1" Grid.Column="2"/>
-                            <Label  Text="5 szt." FontSize="Small" FontAttributes="Italic" TextColor="DarkGray" VerticalTextAlignment="Start" HorizontalTextAlignment="Center" Grid.Row="2" Grid.Column="2"/>
-                           
-                        </Grid>
+                                <Label  Text="{Binding ProductPrice.MinPrice}" FontSize="Medium" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="End" HorizontalTextAlignment="Center" Grid.Row="1" Grid.Column="2"/>
+                                <Label  Text="{Binding Currency}" FontSize="Medium" FontAttributes="Italic" TextColor="DarkGray" VerticalTextAlignment="Start" HorizontalTextAlignment="Center" Grid.Row="2" Grid.Column="2"/>
+                                
+                            </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
