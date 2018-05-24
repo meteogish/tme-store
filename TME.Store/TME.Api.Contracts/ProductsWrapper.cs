@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using TME.Api.Domain.Components;
-using TME.Domain.Components;
 using TME.Api.Domain.Models;
 
 using TME.Api.Contracts.Logic;

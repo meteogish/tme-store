@@ -1,18 +1,23 @@
 ﻿using System.IO;
-using Android.Content.Res;
+using Foundation;
 using TME.Api.Domain.Models;
 using TME.Api.Domain.Components;
 
-namespace TME.Store.Droid
+namespace TME.Store.iOS.iOS
 {
     public class AppConfigurationProvider : IApiConfigurationProvider
     {
         public ApiConfiguration ApiConfiguration { get; private set; }
 
-        public AppConfigurationProvider(AssetManager assetManager)
+        public AppConfigurationProvider()
         {
             string fullSecret;
-            using (StreamReader sr = new StreamReader(assetManager.Open("Secret.txt")))
+
+            var fileInfos = NSBundle.GetPathsForResources(".txt", "");
+            var filePath = NSBundle.MainBundle.PathForResource("Secret", ".txt");
+            var fileInfo = new FileInfo(filePath);
+
+            using (StreamReader sr = new StreamReader(new FileStream(fileInfo.FullName, FileMode.Open)))
             {
                 fullSecret = sr.ReadToEnd();
             }
