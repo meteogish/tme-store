@@ -8,7 +8,7 @@ namespace TME.Api.Domain.Components
 
     public interface IApiProductPricesAndStocksProvider
     {
-        List<ApiProductPriceAndStock> GetPricesAndStocks(List<string> SymbolList);
+        ApiPriceResult<ApiProductPriceAndStock> GetPricesAndStocks(List<string> SymbolList);
     }
 
 

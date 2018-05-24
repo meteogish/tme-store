@@ -6,6 +6,6 @@ namespace TME.Api.Domain.Components
 {
     public interface IApiPricesProvider
     {
-        ApiPriceResult GetPrices(List<string> SymbolList);
+        ApiPriceResult<ApiProductPrice> GetPrices(List<string> SymbolList);
     }
 }

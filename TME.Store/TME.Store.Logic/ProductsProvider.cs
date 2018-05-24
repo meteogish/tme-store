@@ -22,7 +22,9 @@ namespace TME.Store.Logic
         public ProductsResult GetProducts(List<string> symbols)
         {
             List<ApiProduct> apiProducts = _apiProductsProvider.GetProducts(symbols);
-            ApiPriceResult priceResult = _apiPricesProvider.GetPrices(symbols);
+            ApiPriceResult<ApiProductPrice> priceResult = _apiPricesProvider.GetPrices(symbols);
+
+
 
             List<Product> products = apiProducts
                 .Join<ApiProduct, ApiProductPrice, string, Product>(

@@ -145,7 +145,7 @@ namespace TME.Api.Contracts
             return ((JObject)root.Data).ToObject<ApiSearchResult>();
         }
 
-        public ApiPriceResult GetPrices(List<string> SymbolList)
+        public ApiPriceResult<ApiProductPrice> GetPrices(List<string> SymbolList)
         {
             List<KeyValuePair<string, string>> values = CombineValues(SymbolList);
             values.Add(new KeyValuePair<string, string>("Currency", _apiConfiguration.Currency));
@@ -155,7 +155,7 @@ namespace TME.Api.Contracts
 
             RootObjectResponse root = _requestService.SendPostRequest(Get_Prices_Url, values);
 
-            return ((JObject)root.Data).ToObject<ApiPriceResult>();
+            return ((JObject)root.Data).ToObject<ApiPriceResult<ApiProductPrice>>();
         }
 
         public List<ApiProductFiles> GetProductsFiles(List<string> SymbolList)
@@ -168,6 +168,19 @@ namespace TME.Api.Contracts
             RootObjectResponse root = _requestService.SendPostRequest(Get_ProductFiles_Url, values);
 
             return ((JObject)root.Data).GetValue("ProductList").ToObject<List<ApiProductFiles>>();
+        }
+
+        public ApiPriceResult<ApiProductPriceAndStock> GetPricesAndStocks(List<string> SymbolList)
+        {
+            List<KeyValuePair<string, string>> values = CombineValues(SymbolList);
+            values.Add(new KeyValuePair<string, string>("Currency", _apiConfiguration.Currency));
+
+            string apiSignature = CreateApiSignature(Get_PricesAndStocks, values);
+            values.Add(new KeyValuePair<string, string>("ApiSignature", apiSignature));
+
+            RootObjectResponse root = _requestService.SendPostRequest(Get_PricesAndStocks, values);
+            return ((JObject)root.Data).ToObject<ApiPriceResult<ApiProductPriceAndStock>>(); ;
+
         }
 
 
