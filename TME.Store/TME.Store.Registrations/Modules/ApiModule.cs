@@ -45,6 +45,10 @@ namespace TME.Store.Registrations.Modules
             builder.RegisterType<ProductsWrapper>()
              .As<IApiProductPricesAndStocksProvider>()
              .SingleInstance();
+
+            builder.RegisterType<ProductsWrapper>()
+            .As<IApiSearchService>()
+            .SingleInstance();
         }
     }
 }
