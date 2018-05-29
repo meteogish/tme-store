@@ -56,7 +56,7 @@ namespace TME.Store.Logic
 
         public ProductsResult Search(string symbol)
         {
-            List<ApiSearchProduct> apiProducts = _apiSearchService.Search(symbol).ProductList;
+            List<ApiSearchProduct> apiProducts = _apiSearchService.Search(symbol,2).ProductList;
             List<String> listOfSymbols = apiProducts.Select(s => s.Symbol).ToList();
             
             ApiPriceResult<ApiProductPriceAndStock> pricesAndStockResult = _apiPricesAndStocksProvider.GetPricesAndStocks(listOfSymbols.Take(10).ToList());

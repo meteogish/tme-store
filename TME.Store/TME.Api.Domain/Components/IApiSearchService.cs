@@ -18,6 +18,6 @@ namespace TME.Api.Domain.Components
         //    string SearchOrderType
         //    );
 
-        ApiSearchResult Search(string searchPlain);
+        ApiSearchResult Search(string searchPlain, int searchPage);
     }
 }

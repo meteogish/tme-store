@@ -133,10 +133,11 @@ namespace TME.Api.Contracts
             return (((JObject)root.Data)["SymbolList"]).ToObject<List<string>>();
         }
 
-        public ApiSearchResult Search(string searchText)
+        public ApiSearchResult Search(string searchText, int searchPage)
         {
             List<KeyValuePair<string, string>> values = CombineValues(null);
             values.Add(new KeyValuePair<string, string>("SearchPlain", searchText));
+            values.Add(new KeyValuePair<string, string>("SearchPage", searchPage.ToString()));
 
             string apiSignature = CreateApiSignature(Get_SearchResult, values);
             values.Add(new KeyValuePair<string, string>("ApiSignature", apiSignature));
