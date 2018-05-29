@@ -23,9 +23,20 @@
                 />
             </StackLayout>
             
-            <views:ProductListView Grid.Row="1" Grid.Column="0"/> 
-        
+            <views:ProductListView Grid.Row="1" Grid.Column="0"/>
+           
         </Grid>
     </ContentPage.Content>
-    
+
+    <ContentPage.ToolbarItems>
+        
+        <ToolbarItem Name="logo" Order="Primary" Icon="logo_tme.png" Text="TME" Priority="0"/>
+        <ToolbarItem  Order="Primary" Priority="0" />
+        <ToolbarItem  Order="Primary" Priority="0" />
+        <ToolbarItem  Order="Primary" Priority="0" />
+        <ToolbarItem  Order="Primary" Priority="1" Icon="blue"/>
+
+    </ContentPage.ToolbarItems>
+
+
 </ContentPage>
