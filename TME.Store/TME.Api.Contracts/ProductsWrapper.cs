@@ -13,7 +13,7 @@ using TME.Api.Contracts.Logic;
 namespace TME.Api.Contracts
 {
     public class ProductsWrapper : IApiSymbolsProvider, IApiProductsProvider, IApiStocksProvider, IApiCategoriesProvider,
-        IApiSearchService, IApiPricesProvider, IApiProductFilesProvider
+        IApiSearchService, IApiPricesProvider, IApiProductFilesProvider, IApiProductPricesAndStocksProvider
     {
         private const string Get_Stocks_Url = @"https://api.tme.eu/Products/GetStocks.json";
         private const string Get_Categories_Url = @"https://api.tme.eu/Products/GetCategories.json";

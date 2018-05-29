@@ -14,9 +14,6 @@ namespace TME.Store.Registrations.Modules
             base.Load(builder);
             builder.RegisterType<ProductsProvider>()
                 .As<IProductsProvider>();
-
-            builder.RegisterType<SearchService>()
-                .As<ISearchService>();
         }
     }
 }   

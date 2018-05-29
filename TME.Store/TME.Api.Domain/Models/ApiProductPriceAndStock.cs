@@ -4,19 +4,19 @@ using System.Text;
 
 namespace TME.Api.Domain.Models
 {
-    public  class ApiProductPriceAndStock: ApiProductPrice
+    public class ApiProductPriceAndStock: ApiProductPrice
     {
-       public int Ammount { get; private set; }
+       public int Amount { get; private set; }
 
         public ApiProductPriceAndStock(string Symbol,
                                         string Unit,
                                         int VatRate,
                                         string VatType,
                                         List<ApiPrice> PriceList,
-                                        int ammount)
+                                        int amount)
             : base(Symbol, Unit, VatRate, VatType, PriceList)
         {
-            Ammount = ammount;
+            Amount = amount;
         }
     }
 }

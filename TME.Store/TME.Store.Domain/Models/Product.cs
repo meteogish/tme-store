@@ -35,6 +35,7 @@ namespace TME.Store.Domain.Models
             ProductPrice = price;
             Photo = "https:" + photo;
             Thumbnail = "https:" + thumbnail;
+            Amount = amount;
         }
     }
 }

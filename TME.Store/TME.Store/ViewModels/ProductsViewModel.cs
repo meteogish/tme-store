@@ -18,7 +18,6 @@ namespace TME.Store.ViewModels
         private ObservableCollection<Product> products;
         private string currency;
         private IProductsProvider _productsProvider;
-        private ISearchService _searchService;
         public event PropertyChangedEventHandler PropertyChanged;
 
         private bool isBusy=false;
@@ -85,7 +84,7 @@ namespace TME.Store.ViewModels
 
             await Task.Run(() =>
             {
-                ProductsResult productsResult = _searchService.GetSearchedProducts(symbols);
+                ProductsResult productsResult = _productsProvider.Search(symbols);
                 Items = new ObservableCollection<Product>(productsResult.Products);
                 Currency = productsResult.Currency;
 
@@ -94,9 +93,9 @@ namespace TME.Store.ViewModels
             this.IsBusy = false;
         }
 
-        public ProductsViewModel(ISearchService searchService, INavigation navigation)
+        public ProductsViewModel(IProductsProvider productsProvider, INavigation navigation)
         {
-            _searchService = searchService;
+            _productsProvider = productsProvider;
             SearchCommand = new Command<string>((text) =>
             {
                 navigation.PushAsync(new ProductsPage(text));
