@@ -13,7 +13,8 @@ namespace TME.Store.Registrations
         {
             base.Load(builder);
             //Register all ViewModels here
-            builder.RegisterType<ProductsViewModel>();
+            builder.RegisterType<ProductListViewModel>();
+            builder.RegisterType<SearchProductsPageViewModel>();
             builder.Register(ctx =>
                 {
                     return Application.Current.MainPage.Navigation;

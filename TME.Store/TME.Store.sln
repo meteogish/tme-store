@@ -7,17 +7,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TME.Store.Android", "TME.St
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TME.Store", "TME.Store\TME.Store.csproj", "{69BD3162-A104-4C8C-B2E4-FBD3BA9E1BF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tmeapiwrapper", "tmeapiwrapper\tmeapiwrapper.csproj", "{0FCF8955-0B1B-4060-B26A-1A32314FD3C0}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TME.Store.Registrations", "TME.Store.Registrations\TME.Store.Registrations.csproj", "{08C3CA31-1B96-4043-8626-6FBA99F8C084}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TME.Api.Domain", "TME.Api.Domain\TME.Api.Domain.csproj", "{E16963D9-937B-45CE-9245-7995BA1B832C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TME.Api.Domain", "TME.Api.Domain\TME.Api.Domain.csproj", "{E16963D9-937B-45CE-9245-7995BA1B832C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TME.Api.Contracts", "TME.Api.Contracts\TME.Api.Contracts.csproj", "{8ED0A8BE-5447-4788-AA36-EEE6FBAA9969}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TME.Store.Domain", "TME.Store.Domain\TME.Store.Domain.csproj", "{CB1530E1-68F5-4B8A-B1C1-7289CA33F3A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TME.Store.Logic", "TME.Store.Logic\TME.Store.Logic.csproj", "{04275787-CD19-4D39-AC41-4686A6F1D771}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TME.Store.Logic", "TME.Store.Logic\TME.Store.Logic.csproj", "{04275787-CD19-4D39-AC41-4686A6F1D771}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +33,6 @@ Global
 		{69BD3162-A104-4C8C-B2E4-FBD3BA9E1BF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69BD3162-A104-4C8C-B2E4-FBD3BA9E1BF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69BD3162-A104-4C8C-B2E4-FBD3BA9E1BF4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0FCF8955-0B1B-4060-B26A-1A32314FD3C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0FCF8955-0B1B-4060-B26A-1A32314FD3C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0FCF8955-0B1B-4060-B26A-1A32314FD3C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0FCF8955-0B1B-4060-B26A-1A32314FD3C0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{08C3CA31-1B96-4043-8626-6FBA99F8C084}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{08C3CA31-1B96-4043-8626-6FBA99F8C084}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08C3CA31-1B96-4043-8626-6FBA99F8C084}.Release|Any CPU.ActiveCfg = Release|Any CPU
