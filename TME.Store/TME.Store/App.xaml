@@ -6,5 +6,13 @@
 
 		<!-- Application resource dictionary -->
 
-	</Application.Resources>
+        <ResourceDictionary>
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="#3366FF"/>
+                <Setter Property="HasBackButton" Value="True"/>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+
+
 </Application>

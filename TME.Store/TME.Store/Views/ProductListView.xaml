@@ -22,32 +22,36 @@
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="32" />
-                                <RowDefinition Height="50" />
-                                <RowDefinition Height="50" />
-                                <RowDefinition Height="15" />
-                            </Grid.RowDefinitions>
+                                <RowDefinition Height="35" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="60" />
+                                <RowDefinition Height="6" />
+                                <RowDefinition Height="0" />
+                                </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="30*"/>
                                 <ColumnDefinition Width="60*"/>
+                                <ColumnDefinition Width="30*"/>
                                 <ColumnDefinition Width="20*"/>
-                                <ColumnDefinition Width="15*"/>
                             </Grid.ColumnDefinitions>
 
+                                <BoxView Grid.Row="4" Grid.ColumnSpan="4" BackgroundColor="#e8e8e8"/>
+                                <BoxView Grid.Row="0" Grid.ColumnSpan="4" BackgroundColor="#3366FF"/>
+                            
+                             
+                                <Label  HorizontalOptions="StartAndExpand" Text="{Binding Symbol}" Grid.Row="0" Grid.ColumnSpan="4" FontSize="Medium" Margin="6,2,6,2" TextColor="White" FontAttributes="Bold"/>
 
-                            <BoxView Grid.Row="0" Grid.ColumnSpan="4" BackgroundColor="#3366FF"/>
-                            <Label  HorizontalOptions="StartAndExpand" Text="{Binding Symbol}" Grid.Row="0" Grid.ColumnSpan="4" FontSize="Medium" Margin="6,2,6,2" TextColor="White" FontAttributes="Bold"/>
 
+                                <Image Scale="1.0" Source="{Binding Thumbnail}" Grid.Row="1" Grid.RowSpan="3"/>
 
-                            <Image Scale="1.0" Source="{Binding Thumbnail}" Grid.Row="1" Grid.RowSpan="2"/>
-                            <Label  Text="{Binding Description}" FontSize="Small" FontAttributes="Italic" VerticalTextAlignment="End" TextColor="Black" Grid.Row="1" Grid.Column="1"/>
-                            <Label  Text="{Binding Producer}" FontSize="Small" FontAttributes="Bold" VerticalTextAlignment="Start" TextColor="Black" Grid.Row="2" Grid.Column="1"/>
-
-                            <Label  Text="{Binding ProductPrice.MinPrice}" FontSize="Large" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="End" HorizontalTextAlignment="End" Grid.Row="1" Grid.Column="2"/>
-                            <Label  Text="PLN" FontSize="Large" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="End" HorizontalTextAlignment="Start" Grid.Row="1" Grid.Column="3"/>
-                            <Label  Text="{Binding Amount}" FontSize="Small" FontAttributes="Italic" TextColor="DarkGray" VerticalTextAlignment="Start" HorizontalTextAlignment="End" Grid.Row="2" Grid.Column="2"/>
-                            <Label  Text="{Binding Unit}" FontSize="Small" FontAttributes="Italic" TextColor="DarkGray" VerticalTextAlignment="Start" HorizontalTextAlignment="Start" Grid.Row="2" Grid.Column="3"/>
-                          
-                            </Grid>
+                                <Label  Text="{Binding Producer}" FontSize="Small" FontAttributes="Bold" VerticalTextAlignment="Start" TextColor="Black" Grid.Row="2" Grid.Column="1"/>
+                                <Label  Text="{Binding Category}" FontSize="Small" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="Black"  Grid.Row="1" Grid.Column="1"/>
+                                <Label  Text="{Binding Description}" FontSize="Small" FontAttributes="Italic" VerticalTextAlignment="Start" TextColor="Black" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+                                <Label  Text="{Binding ProductPrice.MinPrice}" FontSize="Medium" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="End" HorizontalTextAlignment="End" Grid.Row="1" Grid.Column="2"/>
+                                <Label  Text="PLN" FontSize="Medium" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="End" HorizontalTextAlignment="Start" Grid.Row="1" Grid.Column="3"/>
+                                <Label  Text="{Binding Amount}" FontSize="Small" FontAttributes="Italic" TextColor="DarkGray" VerticalTextAlignment="Start" HorizontalTextAlignment="End" Grid.Row="2" Grid.Column="2"/>
+                                <Label  Text="{Binding Unit}" FontSize="Small" FontAttributes="Italic" TextColor="DarkGray" VerticalTextAlignment="Start" HorizontalTextAlignment="Start" Grid.Row="2" Grid.Column="3"/>
+                        </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
