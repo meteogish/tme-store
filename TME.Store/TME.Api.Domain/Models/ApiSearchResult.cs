@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TME.Api.Domain.Models
 {
     public class ApiSearchResult
     {
-        public List<ApiProduct> Product { get; private set; }
-
-        public ApiSearchResult(List<ApiProduct> Product)
-        {
-            this.Product = Product;
-        }
+        public List<ApiSearchProduct> ProductList { get; set; }
+        public int Amount { get; set; }
+        public int PageNumber { get; set; }
+        public Dictionary<string,int> CategoryList { get; set; }
     }
 }

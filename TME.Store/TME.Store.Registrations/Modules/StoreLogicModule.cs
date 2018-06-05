@@ -16,4 +16,4 @@ namespace TME.Store.Registrations.Modules
                 .As<IProductsProvider>();
         }
     }
-}
+}   

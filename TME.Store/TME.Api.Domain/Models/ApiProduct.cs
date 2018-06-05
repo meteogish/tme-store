@@ -6,7 +6,7 @@
         public string OriginalSymbol { get; private set; }
         public string Producer { get; private set; }
         public string Description { get; private set; }
-        public int OfferId { get; private set; }
+        public int? OfferId { get; private set; }
         public string CategoryId { get; private set; }
         public string Category { get; private set; }
         public string Photo { get; private set; }
@@ -25,7 +25,7 @@
                          string OriginalSymbol,
                          string Producer,
                          string Description,
-                         int OfferId,
+                         int? OfferId,
                          string CategoryId,
                          string Category,
                          string Photo,
