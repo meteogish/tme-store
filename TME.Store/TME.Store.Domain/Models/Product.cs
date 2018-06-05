@@ -15,7 +15,7 @@ namespace TME.Store.Domain.Models
         public string Thumbnail { get; private set; }
         public int Amount { get; private set; }     
         public ProductPrice ProductPrice { get; }
-
+        public string Currency { get; private set; }
         public Product(string symbol,
                         string producer,
                         string description,
@@ -24,6 +24,7 @@ namespace TME.Store.Domain.Models
                         string thumbnail,
                         string photo,
                         int amount,
+                        string currency,
                         ProductPrice price
                        )
         {
@@ -36,6 +37,7 @@ namespace TME.Store.Domain.Models
             Photo = "https:" + photo;
             Thumbnail = "https:" + thumbnail;
             Amount = amount;
+            Currency = currency;
         }
     }
 }

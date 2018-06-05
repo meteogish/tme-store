@@ -47,8 +47,8 @@
                                 <Label  Text="{Binding Producer}" FontSize="Small" FontAttributes="Bold" VerticalTextAlignment="Start" TextColor="Black" Grid.Row="2" Grid.Column="1"/>
                                 <Label  Text="{Binding Category}" FontSize="Small" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="Black"  Grid.Row="1" Grid.Column="1"/>
                                 <Label  Text="{Binding Description}" FontSize="Small" FontAttributes="Italic" VerticalTextAlignment="Start" TextColor="Black" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-                                <Label  Text="{Binding ProductPrice.MinPrice}" FontSize="Medium" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="End" HorizontalTextAlignment="End" Grid.Row="1" Grid.Column="2"/>
-                                <Label  Text="PLN" FontSize="Medium" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="End" HorizontalTextAlignment="Start" Grid.Row="1" Grid.Column="3"/>
+                                <Label  Text="{Binding ProductPrice.MinPrice, StringFormat=\{0:F\}}" FontSize="Medium" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="End" HorizontalTextAlignment="End" Grid.Row="1" Grid.Column="2"/>
+                                <Label  Text="{Binding Currency}" FontSize="Small" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="End" HorizontalTextAlignment="Start" Grid.Row="1" Grid.Column="3"/>
                                 <Label  Text="{Binding Amount}" FontSize="Small" FontAttributes="Italic" TextColor="DarkGray" VerticalTextAlignment="Start" HorizontalTextAlignment="End" Grid.Row="2" Grid.Column="2"/>
                                 <Label  Text="{Binding Unit}" FontSize="Small" FontAttributes="Italic" TextColor="DarkGray" VerticalTextAlignment="Start" HorizontalTextAlignment="Start" Grid.Row="2" Grid.Column="3"/>
                         </Grid>

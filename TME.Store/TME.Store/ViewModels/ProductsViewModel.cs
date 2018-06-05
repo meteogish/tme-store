@@ -16,31 +16,33 @@ namespace TME.Store.ViewModels
     {
 
         private ObservableCollection<Product> products;
-        private string currency;
         private IProductsProvider _productsProvider;
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private bool isBusy=false;
+        private bool isBusy = false;
 
-        public bool IsBusy { 
-        
-        set {
+        public bool IsBusy
+        {
+
+            set
+            {
                 OnPropertyChanged();
                 isBusy = value;
-        }
-         
-        
-        get   { return isBusy; }
-        
+            }
+
+
+            get { return isBusy; }
+
         }
 
         public ICommand MyCommand { private set; get; }
 
         private ICommand searchCommand;
 
-        public ICommand SearchCommand {
+        public ICommand SearchCommand
+        {
             get { return searchCommand; }
-            set { searchCommand = value;}
+            set { searchCommand = value; }
         }
 
         public ObservableCollection<Product> Items
@@ -53,16 +55,6 @@ namespace TME.Store.ViewModels
             }
         }
 
-
-        public String Currency
-        {
-            get { return currency; }
-            set
-            {
-                currency = value;
-                OnPropertyChanged();
-            }
-        }
 
 
 
@@ -80,13 +72,12 @@ namespace TME.Store.ViewModels
 
         public async void LoadProducts(string symbols)
         {
-           this.IsBusy = true;
+            this.IsBusy = true;
 
             await Task.Run(() =>
             {
                 ProductsResult productsResult = _productsProvider.Search(symbols);
                 Items = new ObservableCollection<Product>(productsResult.Products);
-                Currency = productsResult.Currency;
 
             });
 
@@ -100,7 +91,7 @@ namespace TME.Store.ViewModels
             {
                 navigation.PushAsync(new ProductsPage(text));
             });
-            
+
         }
     }
 }

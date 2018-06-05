@@ -40,6 +40,7 @@ namespace TME.Store.Logic
                                                 apiProduct.Photo,
                                                 apiProduct.Thumbnail,
                                                 apiProductPriceAndStock.Amount,
+                                                pricesAndStockResult.Currency,
                                                  new ProductPrice(
                                                     apiProductPriceAndStock.VatRate,
                                                     apiProductPriceAndStock.VatType,
@@ -72,6 +73,7 @@ namespace TME.Store.Logic
                                                 apiProduct.Photo,
                                                 apiProduct.Thumbnail,
                                                 apiProductPriceAndStock.Amount,
+                                                pricesAndStockResult.Currency,
                                                  new ProductPrice(
                                                     apiProductPriceAndStock.VatRate,
                                                     apiProductPriceAndStock.VatType,
