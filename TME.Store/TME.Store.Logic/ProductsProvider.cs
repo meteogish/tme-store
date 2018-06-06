@@ -55,15 +55,16 @@ namespace TME.Store.Logic
             return new ProductsResult(pricesAndStockResult.PriceType, pricesAndStockResult.Currency,products);
         }
 
-        public ProductsResult Search(string symbol)
+        public SearchProductsResult Search(string symbol, int page)
         {
-            List<ApiSearchProduct> apiProducts = _apiSearchService.Search(symbol,2).ProductList;
-            List<String> listOfSymbols = apiProducts.Select(s => s.Symbol).ToList();
-            
-            ApiPriceResult<ApiProductPriceAndStock> pricesAndStockResult = _apiPricesAndStocksProvider.GetPricesAndStocks(listOfSymbols.Take(10).ToList());
+            ApiSearchResult apiSearchResult = _apiSearchService.Search(symbol, page);
+            List<String> listOfSymbols = apiSearchResult.ProductList.Select(s => s.Symbol).ToList();
 
-            List<Product> products = (from apiProduct in apiProducts
-                                      join apiProductPriceAndStock in pricesAndStockResult.ProductList on apiProduct.Symbol equals apiProductPriceAndStock.Symbol
+            ApiPriceResult<ApiProductPriceAndStock> pricesAndStockResultFirstHalf = _apiPricesAndStocksProvider.GetPricesAndStocks(listOfSymbols.Take(10).ToList());
+            ApiPriceResult<ApiProductPriceAndStock> pricesAndStockResultSecondHalf = _apiPricesAndStocksProvider.GetPricesAndStocks(listOfSymbols.Skip(10).Take(10).ToList());
+
+            List<Product> products = (from apiProduct in apiSearchResult.ProductList
+                                      join apiProductPriceAndStock in pricesAndStockResultFirstHalf.ProductList.Concat(pricesAndStockResultSecondHalf.ProductList) on apiProduct.Symbol equals apiProductPriceAndStock.Symbol
                                       select new Product(
                                                 apiProduct.Symbol,
                                                 apiProduct.Producer,
@@ -73,7 +74,7 @@ namespace TME.Store.Logic
                                                 apiProduct.Photo,
                                                 apiProduct.Thumbnail,
                                                 apiProductPriceAndStock.Amount,
-                                                pricesAndStockResult.Currency,
+                                                pricesAndStockResultFirstHalf.Currency,
                                                  new ProductPrice(
                                                     apiProductPriceAndStock.VatRate,
                                                     apiProductPriceAndStock.VatType,
@@ -84,8 +85,12 @@ namespace TME.Store.Logic
                                                                         p.Special)).ToList())))
                                                 .ToList();
 
+            int pageCount = apiSearchResult.Amount / 20;
 
-            return new ProductsResult(pricesAndStockResult.PriceType, pricesAndStockResult.Currency, products);
+            return new SearchProductsResult(pricesAndStockResultFirstHalf.PriceType, 
+                                            pricesAndStockResultFirstHalf.Currency, 
+                                            products,
+                                            pageCount);
         }
     }
 }

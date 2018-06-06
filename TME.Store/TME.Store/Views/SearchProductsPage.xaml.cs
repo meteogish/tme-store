@@ -14,14 +14,13 @@ namespace TME.Store.Views
 	public partial class SearchProductsPage : ContentPage
 	{
         private SearchProductsPageViewModel _productsPageViewModel = App.Container.Resolve<SearchProductsPageViewModel>();
-        private ProductListViewModel _productsListViewModel = App.Container.Resolve<ProductListViewModel>();
+        //private ProductListViewModel _productsListViewModel = App.Container.Resolve<ProductListViewModel>();
 
         public SearchProductsPage (string searchText)
 		{
 			InitializeComponent ();
-            BindingContext = _productsListViewModel;
-            ProductListView.BindingContext = _productsListViewModel;
-            Task.Run(() => _productsListViewModel.Search(searchText));
+            BindingContext = _productsPageViewModel;
+            Task.Run(() => ProductListView.Search(searchText));
         }
     }
 }

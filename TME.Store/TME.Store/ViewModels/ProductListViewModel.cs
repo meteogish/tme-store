@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TME.Store.Domain.Components;
 using TME.Store.Domain.Models;
+using System.Linq;
 
 namespace TME.Store.ViewModels
 {
@@ -20,6 +21,7 @@ namespace TME.Store.ViewModels
         public ProductListViewModel(IProductsProvider productsProvider)
         {
             _productsProvider = productsProvider;
+            products = new ObservableCollection<Product>();
         }
 
         public bool IsBusy
@@ -36,6 +38,25 @@ namespace TME.Store.ViewModels
             }
         }
 
+        private string _lastSearchedText;
+        private int page = 1;
+        private int? maxPage = null;
+
+        internal async void OnItemAppearing(Product productAppeared)
+        {
+            if(productAppeared.Symbol == Products.Last().Symbol)
+            {                
+                if(!maxPage.HasValue)
+                {
+                    throw new ArgumentException("MaxPage nie jest ustawiony");
+                }
+
+                if (++page != maxPage)
+                {
+                    await Search(_lastSearchedText, page);
+                }
+            }
+        }
 
         public ObservableCollection<Product> Products
         {
@@ -47,14 +68,23 @@ namespace TME.Store.ViewModels
             }
         }
 
-        public async Task Search(string searchText)
+        public async Task Search(string searchText, int page)
         {
             IsBusy = true;
-
+            _lastSearchedText = searchText;
+            
             await Task.Run(() =>
             {
-                ProductsResult productsResult = _productsProvider.Search(searchText);
-                Products = new ObservableCollection<Product>(productsResult.Products);
+                SearchProductsResult searchResult = _productsProvider.Search(_lastSearchedText, page);
+                foreach (Product prod in searchResult.Products)
+                {
+                    Products.Add(prod);
+                }
+
+                if(page == 1)
+                {
+                    maxPage = searchResult.PageCount;
+                }
             });
 
             IsBusy = false;

@@ -5,17 +5,9 @@ namespace TME.Api.Domain.Models
 {
     public class ApiSearchResult
     {
-        public List<ApiSearchProduct> ProductList { get; private set; }
-        public int Ammount { get; private set; }
-        public int PageNumber { get; private set; }
-        public Dictionary<string,int> CategoryList { get; private set; }
-
-
-        public ApiSearchResult(List<ApiSearchProduct> ProductList)
-        {
-            this.ProductList = ProductList;
-        }
-
-
+        public List<ApiSearchProduct> ProductList { get; set; }
+        public int Amount { get; set; }
+        public int PageNumber { get; set; }
+        public Dictionary<string,int> CategoryList { get; set; }
     }
 }

@@ -8,6 +8,6 @@ namespace TME.Store.Domain.Components
     public interface IProductsProvider
     {
         ProductsResult GetProducts(List<string> symbols);
-        ProductsResult Search(string symbol);
+        SearchProductsResult Search(string symbol, int page);
     }
 }

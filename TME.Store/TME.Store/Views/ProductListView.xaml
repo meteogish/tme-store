@@ -17,7 +17,7 @@
 
 
 
-            <ListView ItemsSource="{Binding Products}"  HasUnevenRows="true" BackgroundColor="White" Margin="3" >
+            <ListView ItemsSource="{Binding Products}"  HasUnevenRows="true" BackgroundColor="White" Margin="3" ItemAppearing="OnItemAppearing">
                 <ListView.ItemTemplate  >
                     <DataTemplate >
                         <ViewCell>
