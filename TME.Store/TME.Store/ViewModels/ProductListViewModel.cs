@@ -14,6 +14,7 @@ namespace TME.Store.ViewModels
     public class ProductListViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<Product> products;
+        private string message; 
         private IProductsProvider _productsProvider;
         public event PropertyChangedEventHandler PropertyChanged;
         private bool isBusy = false;
@@ -68,6 +69,16 @@ namespace TME.Store.ViewModels
             }
         }
 
+        public string Message
+        {
+            get { return message; }
+            set
+            {
+                message = value;
+                OnPropertyChanged();
+            }
+        }
+
         public async Task Search(string searchText, int page)
         {
             IsBusy = true;
@@ -75,15 +86,23 @@ namespace TME.Store.ViewModels
             
             await Task.Run(() =>
             {
-                SearchProductsResult searchResult = _productsProvider.Search(_lastSearchedText, page);
-                foreach (Product prod in searchResult.Products)
+                try
                 {
-                    Products.Add(prod);
-                }
 
-                if(page == 1)
+                    SearchProductsResult searchResult = _productsProvider.Search(_lastSearchedText, page);
+
+                    foreach (Product prod in searchResult.Products)
+                    {
+                        Products.Add(prod);
+                    }
+
+                    if (page == 1)
+                    {
+                        maxPage = searchResult.PageCount;
+                    }
+                } catch(ApplicationException ex)
                 {
-                    maxPage = searchResult.PageCount;
+                    Message = ex.Message;
                 }
             });
 

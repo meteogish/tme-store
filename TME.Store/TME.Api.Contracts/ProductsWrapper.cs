@@ -143,6 +143,15 @@ namespace TME.Api.Contracts
             values.Add(new KeyValuePair<string, string>("ApiSignature", apiSignature));
 
             RootObjectResponse root = _requestService.SendPostRequest(Get_SearchResult, values);
+            try
+            {
+                ApiSearchResult ap = ((JObject)root.Data).ToObject<ApiSearchResult>();
+                return ap;
+            }
+            catch (JsonSerializationException ex)
+            {
+                throw new ApplicationException("Podana fraza nie została znaleziona");
+            }
             return ((JObject)root.Data).ToObject<ApiSearchResult>();
         }
 
