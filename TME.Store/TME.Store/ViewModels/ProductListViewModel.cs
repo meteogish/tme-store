@@ -51,7 +51,7 @@ namespace TME.Store.ViewModels
                     throw new ArgumentException("MaxPage nie jest ustawiony");
                 }
 
-                if (++page != maxPage)
+                if (++page <= maxPage)
                 {
                     await Search(_lastSearchedText, page);
                 }
