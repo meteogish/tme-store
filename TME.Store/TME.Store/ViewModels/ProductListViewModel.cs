@@ -18,7 +18,7 @@ namespace TME.Store.ViewModels
         private IProductsProvider _productsProvider;
         public event PropertyChangedEventHandler PropertyChanged;
         private bool isBusy = false;
-
+        private bool isVisable = false;
         public ProductListViewModel(IProductsProvider productsProvider)
         {
             _productsProvider = productsProvider;
@@ -79,6 +79,16 @@ namespace TME.Store.ViewModels
             }
         }
 
+        public bool IsVisible
+        {
+            get { return isVisable; }
+            set
+            {
+                isVisable = value;
+                OnPropertyChanged();
+            }
+        }
+
         public async Task Search(string searchText, int page)
         {
             IsBusy = true;
@@ -103,6 +113,7 @@ namespace TME.Store.ViewModels
                 } catch(ApplicationException ex)
                 {
                     Message = ex.Message;
+                    IsVisible = true;
                 }
             });
 

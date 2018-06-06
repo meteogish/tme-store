@@ -145,14 +145,12 @@ namespace TME.Api.Contracts
             RootObjectResponse root = _requestService.SendPostRequest(Get_SearchResult, values);
             try
             {
-                ApiSearchResult ap = ((JObject)root.Data).ToObject<ApiSearchResult>();
-                return ap;
+                return ((JObject)root.Data).ToObject<ApiSearchResult>();
             }
             catch (JsonSerializationException ex)
             {
                 throw new ApplicationException("Podana fraza nie została znaleziona");
             }
-            return ((JObject)root.Data).ToObject<ApiSearchResult>();
         }
 
         public ApiPriceResult<ApiProductPrice> GetPrices(List<string> SymbolList)
