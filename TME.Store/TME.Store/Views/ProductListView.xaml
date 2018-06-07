@@ -15,7 +15,7 @@
             </ActivityIndicator>
 
 
-             <Label Text="{Binding Message}" IsVisible="{Binding IsVisible}"></Label>
+            <Label Text="{Binding Message}" HorizontalTextAlignment="Center" IsVisible="{Binding IsVisible}"></Label>
 
             <ListView ItemsSource="{Binding Products}"  HasUnevenRows="true" BackgroundColor="White" Margin="3" ItemAppearing="OnItemAppearing">
                 <ListView.ItemTemplate  >
