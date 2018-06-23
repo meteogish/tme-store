@@ -3,7 +3,7 @@ using Android.Content.PM;
 using Android.OS;
 using TME.Store.Registrations;
 using Autofac;
-using TME.Domain.Components;
+using TME.Api.Domain.Components;
 
 namespace TME.Store.Droid
 {
