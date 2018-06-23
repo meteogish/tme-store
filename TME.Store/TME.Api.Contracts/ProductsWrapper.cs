@@ -196,7 +196,12 @@ namespace TME.Api.Contracts
             string prefixRequest = PrefixRequest(url);
             string suffixRequest = "";
 
-            foreach (KeyValuePair<string, string> el in values.OrderBy(x => x.Key))
+            IEnumerable<KeyValuePair<string, string>> ordered =
+                values.Where(x => x.Key.CompareTo("SymbolList") < 0).OrderBy(x => x.Key)
+                   .Concat(values.Where(x => x.Key.StartsWith("SymbolList")))
+                   .Concat(values.Where(x => !x.Key.StartsWith("SymbolList") && x.Key.CompareTo("SymbolList") > 0).OrderBy(x => x.Key));
+
+            foreach (KeyValuePair<string, string> el in ordered)
             {
                 suffixRequest += suffixRequest.Length > 1 ? WebUtility.UrlEncode("&" + WebUtility.UrlEncode(el.Key) + "=" + WebUtility.UrlEncode(el.Value)) : WebUtility.UrlEncode(WebUtility.UrlEncode(el.Key) + "=" + WebUtility.UrlEncode(el.Value));
             }

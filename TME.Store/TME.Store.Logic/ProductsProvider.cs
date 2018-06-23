@@ -60,11 +60,10 @@ namespace TME.Store.Logic
             ApiSearchResult apiSearchResult = _apiSearchService.Search(symbol, page);
             List<String> listOfSymbols = apiSearchResult.ProductList.Select(s => s.Symbol).ToList();
 
-            ApiPriceResult<ApiProductPriceAndStock> pricesAndStockResultFirstHalf = _apiPricesAndStocksProvider.GetPricesAndStocks(listOfSymbols.Take(10).ToList());
-            ApiPriceResult<ApiProductPriceAndStock> pricesAndStockResultSecondHalf = _apiPricesAndStocksProvider.GetPricesAndStocks(listOfSymbols.Skip(10).Take(10).ToList());
+            ApiPriceResult<ApiProductPriceAndStock> productPrices = _apiPricesAndStocksProvider.GetPricesAndStocks(listOfSymbols);
 
             List<Product> products = (from apiProduct in apiSearchResult.ProductList
-                                      join apiProductPriceAndStock in pricesAndStockResultFirstHalf.ProductList.Concat(pricesAndStockResultSecondHalf.ProductList) on apiProduct.Symbol equals apiProductPriceAndStock.Symbol
+                                      join apiProductPriceAndStock in productPrices.ProductList on apiProduct.Symbol equals apiProductPriceAndStock.Symbol
                                       select new Product(
                                                 apiProduct.Symbol,
                                                 apiProduct.Producer,
@@ -74,7 +73,7 @@ namespace TME.Store.Logic
                                                 apiProduct.Photo,
                                                 apiProduct.Thumbnail,
                                                 apiProductPriceAndStock.Amount,
-                                                pricesAndStockResultFirstHalf.Currency,
+                                                productPrices.Currency,
                                                  new ProductPrice(
                                                     apiProductPriceAndStock.VatRate,
                                                     apiProductPriceAndStock.VatType,
@@ -87,8 +86,8 @@ namespace TME.Store.Logic
 
             int pageCount = (int)Math.Ceiling(apiSearchResult.Amount / 20.0);
 
-            return new SearchProductsResult(pricesAndStockResultFirstHalf.PriceType,
-                                            pricesAndStockResultFirstHalf.Currency,
+            return new SearchProductsResult(productPrices.PriceType,
+                                            productPrices.Currency,
                                             products,
                                             pageCount);
         }

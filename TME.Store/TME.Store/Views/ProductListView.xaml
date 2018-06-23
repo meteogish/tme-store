@@ -1,11 +1,18 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:conv="clr-namespace:TME.Store.Converters"
              x:Class="TME.Store.Views.ProductListView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <conv:NullPriceToStringConverter x:Key="NullPriceConverter"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
   <ContentView.Content>
         <StackLayout>
-            <ActivityIndicator IsVisible="{Binding IsBusy}" 
-            Color="DarkCyan" 
+            <ActivityIndicator IsVisible="{Binding IsBusy}"
+            Color="DarkCyan"
             IsRunning="{Binding IsBusy}"
              BackgroundColor="White"
               VerticalOptions="CenterAndExpand"
@@ -51,7 +58,7 @@
                                 <Label  Text="{Binding Producer}" FontSize="Small" FontAttributes="Bold" VerticalTextAlignment="Start" TextColor="Black" Grid.Row="2" Grid.Column="1"/>
                                 <Label  Text="{Binding Category}" FontSize="Small" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="Black"  Grid.Row="1" Grid.Column="1"/>
                                 <Label  Text="{Binding Description}" FontSize="Small" FontAttributes="Italic" VerticalTextAlignment="Start" TextColor="Black" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-                                <Label  Text="{Binding ProductPrice.MinPrice, StringFormat=\{0:F\}}" FontSize="Medium" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="End" HorizontalTextAlignment="End" Grid.Row="1" Grid.Column="2"/>
+                                <Label  Text="{Binding ProductPrice.MinPrice, Converter={StaticResource Key=NullPriceConverter}, StringFormat=\{0:F\}}" FontSize="Medium" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="End" HorizontalTextAlignment="End" Grid.Row="1" Grid.Column="2"/>
                                 <Label  Text="{Binding Currency}" FontSize="Small" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="End" HorizontalTextAlignment="Start" Grid.Row="1" Grid.Column="3"/>
                                 <Label  Text="{Binding Amount}" FontSize="Small" FontAttributes="Italic" TextColor="DarkGray" VerticalTextAlignment="Start" HorizontalTextAlignment="End" Grid.Row="2" Grid.Column="2"/>
                                 <Label  Text="{Binding Unit}" FontSize="Small" FontAttributes="Italic" TextColor="DarkGray" VerticalTextAlignment="Start" HorizontalTextAlignment="Start" Grid.Row="2" Grid.Column="3"/>
