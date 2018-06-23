@@ -23,7 +23,7 @@
 	<key>MinimumOSVersion</key>
 	<string>8.0</string>
 	<key>CFBundleDisplayName</key>
-	<string>TME.Store.iOS</string>
+	<string>TME.Store</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.tme.TME-Store-iOS</string>
 	<key>CFBundleVersion</key>
