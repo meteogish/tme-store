@@ -20,7 +20,7 @@ namespace TME.Store.Views
 		{
 			InitializeComponent ();
             BindingContext = _productsPageViewModel;
-            Task.Run(() => ProductListView.Search(searchText));
+            Task.Run(() => ProductListView.Search(searchText.Trim().Replace(" ","-")));
         }
     }
 }
