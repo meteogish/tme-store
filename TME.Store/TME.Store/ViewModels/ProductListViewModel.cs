@@ -1,28 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using TME.Store.Domain.Components;
-using TME.Store.Domain.Models;
 using System.Linq;
+using System.Threading.Tasks;
+using GalaSoft.MvvmLight;
+using TME.Store.Domain.Models;
 
 namespace TME.Store.ViewModels
 {
-    public class ProductListViewModel : INotifyPropertyChanged
+    public class ProductListViewModel : ViewModelBase
     {
-        private ObservableCollection<Product> products;
-        private string message; 
-        private IProductsProvider _productsProvider;
-        public event PropertyChangedEventHandler PropertyChanged;
+        private IEnumerator<SearchProductsResult> _searchEnumerator;
+        private string currency;
+        private string errorMessage;
         private bool isBusy = false;
-        private bool isVisable = false;
-        public ProductListViewModel(IProductsProvider productsProvider)
+        private ObservableCollection<Product> products;
+
+        public ProductListViewModel(Func<string, IEnumerator<SearchProductsResult>> searchEnumeratorFactory)
         {
-            _productsProvider = productsProvider;
+            GetSearchEnumerator = searchEnumeratorFactory;
             products = new ObservableCollection<Product>();
+        }
+
+        public string Currency
+        {
+            get
+            {
+                return currency;
+            }
+            set
+            {
+                currency = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string ErrorMessage
+        {
+            get { return errorMessage; }
+            set
+            {
+                errorMessage = value;
+                RaisePropertyChanged();
+            }
         }
 
         public bool IsBusy
@@ -30,32 +50,11 @@ namespace TME.Store.ViewModels
             set
             {
                 isBusy = value;
-                OnPropertyChanged();
+                RaisePropertyChanged();
             }
-
             get
             {
                 return isBusy;
-            }
-        }
-
-        private string _lastSearchedText;
-        private int page = 1;
-        private int? maxPage = null;
-
-        internal async void OnItemAppearing(Product productAppeared)
-        {
-            if(productAppeared.Symbol == Products.Last().Symbol)
-            {                
-                if(!maxPage.HasValue)
-                {
-                    throw new ArgumentException("MaxPage nie jest ustawiony");
-                }
-
-                if (++page <= maxPage)
-                {
-                    await Search(_lastSearchedText, page);
-                }
             }
         }
 
@@ -65,66 +64,49 @@ namespace TME.Store.ViewModels
             set
             {
                 products = value;
-                OnPropertyChanged();
+                RaisePropertyChanged();
             }
         }
 
-        public string Message
+        protected Func<string, IEnumerator<SearchProductsResult>> GetSearchEnumerator { get; private set; }
+
+        public void Search(string searchText)
         {
-            get { return message; }
-            set
+            _searchEnumerator = GetSearchEnumerator(searchText.Trim().Replace(" ", "-"));
+            Currency = null;
+            FetchNextPage();
+        }
+        internal async void OnItemAppearing(Product productAppeared)
+        {
+            if (productAppeared.Symbol == Products.Last().Symbol)
             {
-                message = value;
-                OnPropertyChanged();
+                await Task.Run(FetchNextPage).ConfigureAwait(false);
             }
         }
 
-        public bool IsVisible
+        private async Task FetchNextPage()
         {
-            get { return isVisable; }
-            set
+            try
             {
-                isVisable = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public async Task Search(string searchText, int page)
-        {
-            IsBusy = true;
-            _lastSearchedText = searchText;
-            
-            await Task.Run(() =>
-            {
-                try
+                IsBusy = true;
+                if (_searchEnumerator.MoveNext())
                 {
+                    if (Currency == null)
+                    {
+                        Currency = _searchEnumerator.Current.Currency;
+                    }
 
-                    SearchProductsResult searchResult = _productsProvider.Search(_lastSearchedText, page);
-
-                    foreach (Product prod in searchResult.Products)
+                    foreach (Product prod in _searchEnumerator.Current.Products)
                     {
                         Products.Add(prod);
                     }
-
-                    if (page == 1)
-                    {
-                        maxPage = searchResult.PageCount;
-                    }
-                } catch(ApplicationException ex)
-                {
-                    Message = ex.Message;
-                    IsVisible = true;
                 }
-            });
-
+            }
+            catch (ApplicationException ex)
+            {
+                ErrorMessage = ex.Message;
+            }
             IsBusy = false;
-        }
-
-
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

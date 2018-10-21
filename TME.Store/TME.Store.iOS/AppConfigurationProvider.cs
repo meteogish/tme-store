@@ -3,7 +3,8 @@ using Foundation;
 using TME.Api.Domain.Models;
 using TME.Api.Domain.Components;
 
-namespace TME.Store.iOS.iOS
+[assembly: Xamarin.Forms.Dependency(typeof(TME.Store.iOS.AppConfigurationProvider)) ]
+namespace TME.Store.iOS
 {
     public class AppConfigurationProvider : IApiConfigurationProvider
     {
@@ -22,7 +23,7 @@ namespace TME.Store.iOS.iOS
                 fullSecret = sr.ReadToEnd();
             }
             string[] parts = fullSecret.Split('|');
-            ApiConfiguration = new ApiConfiguration(parts[0], parts[1], "PL", "PLN", "EN");
+            ApiConfiguration = new ApiConfiguration(parts[0], parts[1], "PL", "PLN", "PL");
         }
     }
 }

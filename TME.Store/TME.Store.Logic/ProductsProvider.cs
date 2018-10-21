@@ -23,42 +23,10 @@ namespace TME.Store.Logic
             _apiSearchService = apiSearchService;
         }
 
-        public ProductsResult GetProducts(List<string> symbols)
+        public SearchProductsResult Search(string searchText, int page)
         {
-            List<ApiProduct> apiProducts = _apiProductsProvider.GetProducts(symbols);
-
-            ApiPriceResult<ApiProductPriceAndStock> pricesAndStockResult = _apiPricesAndStocksProvider.GetPricesAndStocks(symbols);
-
-            List<Product> products = (from apiProduct in apiProducts
-                                      join apiProductPriceAndStock in pricesAndStockResult.ProductList on apiProduct.Symbol equals apiProductPriceAndStock.Symbol
-                                      select new Product(
-                                                apiProduct.Symbol,
-                                                apiProduct.Producer,
-                                                apiProduct.Description,
-                                                apiProduct.Category,
-                                                apiProduct.Unit,
-                                                apiProduct.Photo,
-                                                apiProduct.Thumbnail,
-                                                apiProductPriceAndStock.Amount,
-                                                pricesAndStockResult.Currency,
-                                                 new ProductPrice(
-                                                    apiProductPriceAndStock.VatRate,
-                                                    apiProductPriceAndStock.VatType,
-                                                    apiProductPriceAndStock.PriceList.Select(p =>
-                                                                        new PriceOffer(
-                                                                        p.Amount,
-                                                                        p.PriceValue,
-                                                                        p.Special)).ToList())))
-                                                .ToList();
-
-
-            return new ProductsResult(pricesAndStockResult.PriceType, pricesAndStockResult.Currency, products);
-        }
-
-        public SearchProductsResult Search(string symbol, int page)
-        {
-            ApiSearchResult apiSearchResult = _apiSearchService.Search(symbol, page);
-            List<String> listOfSymbols = apiSearchResult.ProductList.Select(s => s.Symbol).ToList();
+            ApiSearchResult apiSearchResult = _apiSearchService.Search(searchText, page);
+            List<string> listOfSymbols = apiSearchResult.ProductList.Select(s => s.Symbol).ToList();
 
             ApiPriceResult<ApiProductPriceAndStock> productPrices = _apiPricesAndStocksProvider.GetPricesAndStocks(listOfSymbols);
 
@@ -73,7 +41,6 @@ namespace TME.Store.Logic
                                                 apiProduct.Photo,
                                                 apiProduct.Thumbnail,
                                                 apiProductPriceAndStock.Amount,
-                                                productPrices.Currency,
                                                  new ProductPrice(
                                                     apiProductPriceAndStock.VatRate,
                                                     apiProductPriceAndStock.VatType,

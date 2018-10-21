@@ -14,6 +14,11 @@
     <AssemblyName>TME.Store.iOS</AssemblyName>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <CodesignKey>iPhone Developer: imeteogish@gmail.com (9J5T29UL3M)</CodesignKey>
+    <CodesignProvision>iOS Team Provisioning Profile: com.tme.TME-Store-iOS</CodesignProvision>
+    <CodesignExtraArgs />
+    <CodesignResourceRules />
+    <CodesignEntitlements />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -88,6 +93,9 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
+    <AppExtensionDebugBundleId />
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
@@ -149,17 +157,13 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms">
-      <Version>3.0.0.482510</Version>
+      <Version>3.2.0.871581</Version>
     </PackageReference>
     <PackageReference Include="Autofac">
       <Version>4.8.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TME.Store.Registrations\TME.Store.Registrations.csproj">
-      <Project>{08C3CA31-1B96-4043-8626-6FBA99F8C084}</Project>
-      <Name>TME.Store.Registrations</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TME.Store\TME.Store.csproj">
       <Project>{69BD3162-A104-4C8C-B2E4-FBD3BA9E1BF4}</Project>
       <Name>TME.Store</Name>

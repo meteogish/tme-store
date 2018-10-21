@@ -1,72 +1,178 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:conv="clr-namespace:TME.Store.Converters"
-             x:Class="TME.Store.Views.ProductListView">
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="TME.Store.Views.ProductListView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:conv="clr-namespace:TME.Store.Converters"
+    xmlns:vmcontent="clr-namespace:TME.Store.ViewModels"
+    x:Name="ProductListViewName"
+    >
     <ContentView.Resources>
         <ResourceDictionary>
-            <conv:NullPriceToStringConverter x:Key="NullPriceConverter"/>
+            <conv:NullPriceToStringConverter x:Key="NullPriceConverter" />
+            <conv:StringToBoolConverter x:Key="StringEmptyConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
 
-  <ContentView.Content>
+    <ContentView.Content>
         <StackLayout>
-            <ActivityIndicator IsVisible="{Binding IsBusy}"
-            Color="DarkCyan"
-            IsRunning="{Binding IsBusy}"
-             BackgroundColor="White"
-              VerticalOptions="CenterAndExpand"
-              HorizontalOptions="FillAndExpand"
-               HeightRequest="100"
-               WidthRequest="100">
+            <ActivityIndicator
+                BackgroundColor="White"
+                IsRunning="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}"
+                >
+                <ActivityIndicator.HeightRequest>
+                    <OnPlatform
+                        x:TypeArguments="x:Double"
+                        Android="60"
+                        iOS="30"
+                        />
+                </ActivityIndicator.HeightRequest>
+                <ActivityIndicator.Color>
+                    <OnPlatform
+                        x:TypeArguments="Color"
+                        Android="#2499CE"
+                        iOS="Black"
+                        />
+                </ActivityIndicator.Color>
             </ActivityIndicator>
 
+            <Label
+                HorizontalTextAlignment="Center"
+                IsVisible="{Binding ErrorMessage, Converter={StaticResource Key=StringEmptyConverter}}"
+                Text="{Binding ErrorMessage}"
+                />
 
-            <Label Text="{Binding Message}" HorizontalTextAlignment="Center" IsVisible="{Binding IsVisible}"></Label>
-
-            <ListView ItemsSource="{Binding Products}"  HasUnevenRows="true" BackgroundColor="White" Margin="3" ItemAppearing="OnItemAppearing">
-                <ListView.ItemTemplate  >
-                    <DataTemplate >
+            <ListView
+                Margin="3,0,3,3"
+                BackgroundColor="White"
+                HasUnevenRows="true"
+                ItemAppearing="OnItemAppearing"
+                ItemTapped="ListView_ItemTapped"
+                ItemsSource="{Binding Products}"
+                >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
                         <ViewCell>
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="32" />
-                                    <RowDefinition Height="35" />
+                                    <RowDefinition Height="32" />
                                     <RowDefinition Height="20" />
                                     <RowDefinition Height="60" />
-                                    <RowDefinition Height="6" />
+                                    <RowDefinition Height="4" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="30*"/>
-                                    <ColumnDefinition Width="60*"/>
-                                    <ColumnDefinition Width="30*"/>
-                                    <ColumnDefinition Width="20*"/>
+                                    <ColumnDefinition Width="30*" />
+                                    <ColumnDefinition Width="60*" />
+                                    <ColumnDefinition Width="30*" />
+                                    <ColumnDefinition Width="20*" />
                                 </Grid.ColumnDefinitions>
 
+                                <BoxView
+                                    Grid.Row="0"
+                                    Grid.RowSpan="5"
+                                    BackgroundColor="White"
+                                    />
+                                <BoxView
+                                    Grid.Row="4"
+                                    Grid.ColumnSpan="4"
+                                    BackgroundColor="#e8e8e8"
+                                    />
+
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.ColumnSpan="4"
+                                    Margin="6,2,6,2"
+                                    FontSize="Medium"
+                                    HorizontalOptions="StartAndExpand"
+                                    Text="{Binding Symbol}"
+                                    TextColor="#3366FF"
+                                    VerticalTextAlignment="End"
+                                    />
 
 
-                                <BoxView Grid.Row="0" Grid.RowSpan="5" BackgroundColor="White"/>
-                                <BoxView Grid.Row="4" Grid.ColumnSpan="4" BackgroundColor="#e8e8e8"/>
-                                <BoxView Grid.Row="0" Grid.ColumnSpan="4" BackgroundColor="#3366FF"/>
+                                <Image
+                                    Grid.Row="1"
+                                    Grid.RowSpan="3"
+                                    Scale="1.0"
+                                    Source="{Binding Photo}"
+                                    />
 
-
-                                <Label  HorizontalOptions="StartAndExpand" Text="{Binding Symbol}" Grid.Row="0" Grid.ColumnSpan="4" FontSize="Medium" Margin="6,2,6,2" TextColor="White" FontAttributes="Bold"/>
-
-
-                                <Image Scale="1.0" Source="{Binding Thumbnail}" Grid.Row="1" Grid.RowSpan="3"/>
-
-                                <Label  Text="{Binding Producer}" FontSize="Small" FontAttributes="Bold" VerticalTextAlignment="Start" TextColor="Black" Grid.Row="2" Grid.Column="1"/>
-                                <Label  Text="{Binding Category}" FontSize="Small" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="Black"  Grid.Row="1" Grid.Column="1"/>
-                                <Label  Text="{Binding Description}" FontSize="Small" FontAttributes="Italic" VerticalTextAlignment="Start" TextColor="Black" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-                                <Label  Text="{Binding ProductPrice.MinPrice, Converter={StaticResource Key=NullPriceConverter}, StringFormat=\{0:F\}}" FontSize="Medium" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="End" HorizontalTextAlignment="End" Grid.Row="1" Grid.Column="2"/>
-                                <Label  Text="{Binding Currency}" FontSize="Small" FontAttributes="Bold" TextColor="Black" VerticalTextAlignment="End" HorizontalTextAlignment="Start" Grid.Row="1" Grid.Column="3"/>
-                                <Label  Text="{Binding Amount}" FontSize="Small" FontAttributes="Italic" TextColor="DarkGray" VerticalTextAlignment="Start" HorizontalTextAlignment="End" Grid.Row="2" Grid.Column="2"/>
-                                <Label  Text="{Binding Unit}" FontSize="Small" FontAttributes="Italic" TextColor="DarkGray" VerticalTextAlignment="Start" HorizontalTextAlignment="Start" Grid.Row="2" Grid.Column="3"/>
+                                <Label
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    FontAttributes="Bold"
+                                    FontSize="Small"
+                                    Text="{Binding Producer}"
+                                    TextColor="Black"
+                                    VerticalTextAlignment="Center"
+                                    />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    FontAttributes="Bold"
+                                    FontSize="Small"
+                                    Text="{Binding Category}"
+                                    TextColor="Black"
+                                    VerticalTextAlignment="End"
+                                    />
+                                <Label
+                                    Grid.Row="3"
+                                    Grid.RowSpan="2"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="2"
+                                    FontAttributes="Italic"
+                                    FontSize="Small"
+                                    Text="{Binding Description}"
+                                    TextColor="Black"
+                                    VerticalTextAlignment="Start"
+                                    />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="2"
+                                    FontAttributes="Bold"
+                                    FontSize="Medium"
+                                    HorizontalTextAlignment="End"
+                                    Text="{Binding ProductPrice.MinPrice, Converter={StaticResource Key=NullPriceConverter}, StringFormat=\{0:F\}}"
+                                    TextColor="Black"
+                                    VerticalTextAlignment="End"
+                                    />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="3"
+                                    FontAttributes="Bold"
+                                    FontSize="Small"
+                                    HorizontalTextAlignment="Start"
+                                    Text="{Binding Path=BindingContext.Currency, Source={x:Reference Name=ProductListViewName}}"
+                                    TextColor="Black"
+                                    VerticalTextAlignment="End"
+                                    />
+                                <Label
+                                    Grid.Row="2"
+                                    Grid.Column="2"
+                                    FontAttributes="Italic"
+                                    FontSize="Small"
+                                    HorizontalTextAlignment="End"
+                                    Text="{Binding Amount}"
+                                    TextColor="DarkGray"
+                                    VerticalTextAlignment="Start"
+                                    />
+                                <Label
+                                    Grid.Row="2"
+                                    Grid.Column="3"
+                                    FontAttributes="Italic"
+                                    FontSize="Small"
+                                    HorizontalTextAlignment="Start"
+                                    Text="{Binding Unit}"
+                                    TextColor="DarkGray"
+                                    VerticalTextAlignment="Start"
+                                    />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
-  </ContentView.Content>
+    </ContentView.Content>
 </ContentView>

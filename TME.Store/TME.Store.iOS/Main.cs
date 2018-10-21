@@ -5,7 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
-namespace TME.Store.iOS.iOS
+namespace TME.Store.iOS
 {
     public class Application
     {

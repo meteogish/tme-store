@@ -1,8 +1,4 @@
-﻿using Autofac;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Threading.Tasks;
 using TME.Store.ViewModels;
 using Xamarin.Forms;
@@ -10,17 +6,28 @@ using Xamarin.Forms.Xaml;
 
 namespace TME.Store.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class SearchProductsPage : ContentPage
 	{
-        private SearchProductsPageViewModel _productsPageViewModel = App.Container.Resolve<SearchProductsPageViewModel>();
-        //private ProductListViewModel _productsListViewModel = App.Container.Resolve<ProductListViewModel>();
+        private string _initialSearchText = null;
 
         public SearchProductsPage (string searchText)
 		{
 			InitializeComponent ();
-            BindingContext = _productsPageViewModel;
-            Task.Run(() => ProductListView.Search(searchText.Trim().Replace(" ","-")));
+            _initialSearchText = searchText;
+            SearchBar.Text = _initialSearchText;
+
+            (ProductListView.BindingContext as ProductListViewModel).Search(searchText);
+        }
+
+        private void SearchBar_SearchButtonPressed(object sender, EventArgs e)
+        {
+            if(sender is SearchBar searchBar)
+            {
+                string searchedText = searchBar.Text;
+                searchBar.Text = _initialSearchText;
+                Navigation.PushAsync(new SearchProductsPage(searchedText));
+            }
         }
     }
 }

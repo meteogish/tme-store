@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="TME.Store.Views.ProductDetailsView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    >
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25*" />
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+
+            <ScrollView
+                Grid.Row="0"
+                Orientation="Vertical"
+                VerticalOptions="FillAndExpand"
+                >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="200" />
+                        <RowDefinition Height="2" />
+                        <RowDefinition Height="38" />
+                        <RowDefinition Height="25" />
+                        <RowDefinition Height="5" />
+                        <RowDefinition Height="4" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="22" />
+                        <RowDefinition Height="50" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="32*" />
+                        <ColumnDefinition Width="70*" />
+                        <ColumnDefinition Width="18*" />
+                    </Grid.ColumnDefinitions>
+
+                    <BoxView
+                        Grid.Row="1"
+                        Grid.ColumnSpan="3"
+                        BackgroundColor="#e8e8e8"
+                        />
+                    <BoxView
+                        Grid.Row="5"
+                        Grid.ColumnSpan="3"
+                        BackgroundColor="#e8e8e8"
+                        />
+
+                    <Image
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        Margin="0,10,0,0"
+                        HorizontalOptions="Center"
+                        Scale="1.0"
+                        Source="{Binding Productt.Thumbnail}"
+                        VerticalOptions="Center"
+                        />
+                    <Label
+                        Grid.Row="2"
+                        Grid.RowSpan="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Margin="15,2,6,0"
+                        FontSize="Medium"
+                        HorizontalOptions="Start"
+                        Text="{Binding Productt.Symbol}"
+                        TextColor="Black"
+                        VerticalTextAlignment="Start"
+                        />
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Margin="2,0,0,0"
+                        FontAttributes="Bold"
+                        FontSize="Large"
+                        HorizontalTextAlignment="End"
+                        Text="{Binding Productt.ProductPrice.MinPrice}"
+                        TextColor="Black"
+                        VerticalTextAlignment="End"
+                        />
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="2"
+                        FontAttributes="Bold"
+                        FontSize="Small"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding Productt.Currency}"
+                        TextColor="Black"
+                        VerticalTextAlignment="End"
+                        />
+                    <Label
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        FontAttributes="Italic"
+                        FontSize="Small"
+                        HorizontalTextAlignment="End"
+                        Text="{Binding Productt.Amount}"
+                        TextColor="DarkGray"
+                        VerticalTextAlignment="Start"
+                        />
+                    <Label
+                        Grid.Row="3"
+                        Grid.Column="2"
+                        FontAttributes="Italic"
+                        FontSize="Small"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding Productt.Unit}"
+                        TextColor="DarkGray"
+                        VerticalTextAlignment="Start"
+                        />
+                    <Label
+                        Grid.Row="6"
+                        Grid.Column="0"
+                        Margin="20,0,0,0"
+                        FontAttributes="Bold"
+                        FontSize="Small"
+                        HorizontalTextAlignment="Start"
+                        Text="Producent:"
+                        />
+                    <Label
+                        Grid.Row="6"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="3"
+                        Margin="3,0,10,0"
+                        FontAttributes="Bold"
+                        FontSize="Small"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding Productt.Producer}"
+                        TextColor="Black"
+                        />
+                    <Label
+                        Grid.Row="7"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Margin="20,0,10,0"
+                        FontAttributes="Bold"
+                        FontSize="Small"
+                        HorizontalTextAlignment="Start"
+                        Text="Szczegóły produktu:"
+                        VerticalTextAlignment="End"
+                        />
+                    <Label
+                        Grid.Row="8"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        Margin="15,0,6,2"
+                        FontAttributes="Italic"
+                        FontSize="Small"
+                        Text="{Binding Productt.Description}"
+                        TextColor="Black"
+                        VerticalTextAlignment="Start"
+                        />
+
+                </Grid>
+            </ScrollView>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="20*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="20*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+
+                <Button
+                    Grid.Column="1"
+                    Margin="5,5,0,5"
+                    BackgroundColor="Orange"
+                    BorderRadius="6"
+                    Text="Kup teraz"
+                    TextColor="White"
+                    />
+
+                <Button
+                    Grid.Column="3"
+                    Margin="0,5,5,5"
+                    BackgroundColor="LightGray"
+                    BorderRadius="6"
+                    Text="Dodaj do koszyka"
+                    TextColor="Black"
+                    />
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

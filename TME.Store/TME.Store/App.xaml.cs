@@ -3,24 +3,27 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TME.Api.Domain.Components;
 using TME.Store.Registrations;
+using TME.Store.ViewModels;
 using TME.Store.Views;
 using Xamarin.Forms;
 
 namespace TME.Store
 {
 	public partial class App : Application
-	{
-        public static IContainer Container { get; private set; }
+    {
+        private static ViewModels.Locator _locator;
+        public static ViewModels.Locator Locator => _locator ?? (_locator = new ViewModels.Locator());
 
-		public App (ContainerBuilder builder)
+        public INavigation navi;
+		public App ()
 		{
 			InitializeComponent();
-            BuildContainer(builder);
 
             NavigationPage navigationPage = new NavigationPage();
             MainPage = navigationPage;
-            SearchProductsPage root = new Views.SearchProductsPage("diody");
+            SearchProductsPage root = new SearchProductsPage("diody");
             navigationPage.PushAsync(root).Wait();
         }
 
@@ -38,11 +41,5 @@ namespace TME.Store
 		{
 			// Handle when your app resumes
 		}
-
-        private void BuildContainer(ContainerBuilder builder)
-        {
-            builder.RegisterModule<ViewModelsModule>();
-            Container = builder.Build();
-        }
 	}
 }

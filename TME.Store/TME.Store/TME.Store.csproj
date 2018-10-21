@@ -5,14 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MvvmLightStd10" Version="5.4.1.2" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
 	<PackageReference Include="Autofac" Version="4.8.1" />
-    <PackageReference Include="Xamarin.Forms" Version="3.0.0.550146" />
+    <PackageReference Include="Xamarin.Forms" Version="3.2.0.871581" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TME.Api.Domain\TME.Api.Domain.csproj" />
     <ProjectReference Include="..\TME.Store.Domain\TME.Store.Domain.csproj" />
+    <ProjectReference Include="..\TME.Store.Registrations\TME.Store.Registrations.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Views\ProductDetailsView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\ProductListView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

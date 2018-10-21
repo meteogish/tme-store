@@ -1,15 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Application xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TME.Store.App">
-	<Application.Resources>
+<Application
+    x:Class="TME.Store.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    >
+    <Application.Resources>
 
-		<!-- Application resource dictionary -->
+        <!--  Application resource dictionary  -->
 
         <ResourceDictionary>
             <Style TargetType="NavigationPage">
-                <Setter Property="BarBackgroundColor" Value="#3366FF"/>
-                <Setter Property="HasBackButton" Value="True"/>
+                <Setter Property="BarBackgroundColor" Value="#3366FF" />
+                <Setter Property="HasBackButton" Value="True" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>
