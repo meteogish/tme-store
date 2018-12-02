@@ -1,4 +1,6 @@
-import "package:tme_store/api/products_repository.dart";
+import 'package:tme_store/api/components/http_requester.dart';
+import 'package:tme_store/api/components/products_repository.dart';
+import 'package:tme_store/api/components/signature_creator.dart';
 import "package:flutter/material.dart";
 import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;
@@ -20,7 +22,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget>{
     _loadSecrets()
       .then((secrets){
         var parts = secrets.split("|");
-        _repo = ProductsRepository(parts[0], parts[1]);
+        _repo = ProductsRepository(SignatureCreator(parts[0], parts[1]), ApiHttpRequester());
       });
   }
 
@@ -31,7 +33,8 @@ class _FavoriteWidgetState extends State<FavoriteWidget>{
   void _toggleFavorite()
   {
     //repo.search("diody", 1);
-    _repo.getPrices();
+    //["PLED-HOLDER-WH", "PLED-HOLDER-BK", "FIX-LED-6501"];
+    _repo.getPricesAndStocks(["PLED-HOLDER-WH", "PLED-HOLDER-BK", "FIX-LED-6501"]);
     setState(() {
           _isFavorited ? 
             --_favoriteCount :
