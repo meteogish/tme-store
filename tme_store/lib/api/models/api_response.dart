@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tme_store/api/models/api_get_prices_result_and_stock.dart';
+import 'package:tme_store/api/models/api_search_result.dart';
 
 part 'api_response.g.dart';
 
@@ -25,8 +26,14 @@ class ApiResponse<T> {
 
 T _dataFromJson<T>(dynamic json) {
   if (json is! List) {
-    if (T == ApiGetPricesAndStockResult) {
-      return ApiGetPricesAndStockResult.fromJson(json) as T;
+    switch(T)
+    {
+      case ApiGetPricesAndStockResult:
+        return ApiGetPricesAndStockResult.fromJson(json) as T;
+      case ApiSearchResult:
+        return ApiSearchResult.fromJson(json) as T;
+      default:
+        throw "Unknown ApiResponse Data type.";
     }
   }
   return null;
