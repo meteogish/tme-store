@@ -17,7 +17,10 @@ class ApiProduct {
   final String description;
 
   @JsonKey(name: 'OfferId')
-  final int offerId;
+  final String offerId;
+
+  @JsonKey(name: 'CustomerSymbol')
+  final String customerSymbol;
 
   @JsonKey(name: 'CategoryId')
   final String categoryId;
@@ -41,7 +44,7 @@ class ApiProduct {
   final int minAmount;
 
   @JsonKey(name: 'Multiples')
-  final int multiples;
+  final int multiplies;
 
   @JsonKey(name: 'Unit')
   final String unit;
@@ -61,6 +64,7 @@ class ApiProduct {
       this.producer,
       this.description,
       this.offerId,
+      this.customerSymbol,
       this.categoryId,
       this.category,
       this.photoUrl,
@@ -68,7 +72,7 @@ class ApiProduct {
       this.weight,
       this.suppliedAmount,
       this.minAmount,
-      this.multiples,
+      this.multiplies,
       this.unit,
       this.productInformationPage,
       this.guarantee,
