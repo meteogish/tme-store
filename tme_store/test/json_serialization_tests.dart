@@ -166,4 +166,49 @@ void main() {
     expect(product.photoUrl, "\/\/static.tme.eu\/products_pics\/4\/3\/5\/435fc49d5c04ef5ce436709ccac55304\/373351.jpg");
     expect(product.thumbnailUrl, "\/\/static.tme.eu\/products_pics\/4\/3\/5\/435fc49d5c04ef5ce436709ccac55304\/373351_t.jpg");
   });
+
+
+  test("ApiSearchResult deserialization test ", () async {
+    String str = """
+     {
+    "ProductList": [
+      {
+        "Symbol": "FIX-LED-301A",
+        "OriginalSymbol": "FIX-LED-301A",
+        "Producer": "FIX&FASTEN",
+        "Description": "Obudowa diody LED; 3mm; poliamid; kątowa; czarny; UL94V-2; H:7,4mm",
+        "CategoryId": "100324",
+        "Category": "Oprawki",
+        "Photo": "\/\/static.tme.eu\/products_pics\/8\/a\/1\/8a1352c2d9c1348eeb2a52c3111a7379\/301478.jpg",
+        "Thumbnail": "\/\/static.tme.eu\/products_pics\/8\/a\/1\/8a1352c2d9c1348eeb2a52c3111a7379\/301478_t.jpg",
+        "Weight": 0.186,
+        "SuppliedAmount": 0,
+        "MinAmount": 10,
+        "Multiples": 10,
+        "ProductStatusList": [],
+        "Unit": "szt",
+        "OfferId": "",
+        "CustomerSymbol": "",
+        "ProductInformationPage": "\/\/www.tme.eu\/pl\/details\/fix-led-301a\/oprawki\/fixfasten\/",
+        "Guarantee": null
+      }
+    ],
+    "Amount": 17245,
+    "PageNumber": 1,
+    "CategoryList": {
+      "111000": 17245,
+      "112140": 9141
+    }
+  }
+          """;
+
+    ApiSearchResult searchResult = ApiSearchResult.fromJson(json.decode(str));
+
+    expect(searchResult.products.length, 1);
+    expect(searchResult.products.first.symbol, "FIX-LED-301A");
+    expect(searchResult.page, 1);
+    expect(searchResult.totalProductsFound, 17245);
+    expect(searchResult.totalProductsPerCategory.length, 2);
+    expect(searchResult.totalProductsPerCategory["111000"], 17245);
+  });
 }

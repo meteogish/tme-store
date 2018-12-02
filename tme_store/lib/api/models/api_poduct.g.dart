@@ -39,6 +39,7 @@ Map<String, dynamic> _$ApiProductToJson(ApiProduct instance) =>
       'Producer': instance.producer,
       'Description': instance.description,
       'OfferId': instance.offerId,
+      'CustomerSymbol': instance.customerSymbol,
       'CategoryId': instance.categoryId,
       'Category': instance.category,
       'Photo': instance.photoUrl,

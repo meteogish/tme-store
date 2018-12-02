@@ -3,3 +3,4 @@ export 'api_poduct.dart';
 export 'api_price.dart';
 export 'api_product_price_with_stock.dart';
 export 'api_response.dart';
+export 'api_search_result.dart';

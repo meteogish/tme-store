@@ -25,8 +25,8 @@ Map<String, dynamic> _$ApiProductPriceWithStockToJson(
     <String, dynamic>{
       'Symbol': instance.symbol,
       'Unit': instance.unit,
-      'Amount':instance.amount,
       'VatRate': instance.vatRate,
       'VatType': instance.vatType,
+      'Amount': instance.amount,
       'PriceList': instance.prices
     };
