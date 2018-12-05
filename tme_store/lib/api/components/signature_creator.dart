@@ -15,7 +15,7 @@ class SignatureCreator {
 
   String createApiSignature(String urlEndpoint, Map<String, String> values) {
     String signatureBase = _createSignatureBase(urlEndpoint, values);
-    print(signatureBase);
+    //print(signatureBase);
 
     var encodedSignature =
         _hmacSha1Encryptor.convert(ascii.encode(signatureBase));

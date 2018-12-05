@@ -14,7 +14,8 @@ ApiSearchResult _$ApiSearchResultFromJson(Map<String, dynamic> json) {
           ?.map((e) =>
               e == null ? null : ApiProduct.fromJson(e as Map<String, dynamic>))
           ?.toList(),
-      totalProductsPerCategory: (json['CategoryList'] as Map<String, dynamic>)
+      totalProductsPerCategory: 
+        (json['CategoryList'] is Map<String, dynamic> ? json['CategoryList'] as Map<String, dynamic> : null)
           ?.map((k, e) => MapEntry(k, e as int)));
 }
 
