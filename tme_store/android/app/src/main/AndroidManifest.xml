@@ -15,10 +15,11 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="tme_store"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/tme_logo">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
+            android:label="TME.Store"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density"
             android:hardwareAccelerated="true"

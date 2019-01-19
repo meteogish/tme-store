@@ -24,7 +24,7 @@ class ProductItem extends StatelessWidget {
                     style: Theme.of(context).textTheme.subhead.apply(fontWeightDelta: 3)),
                 subtitle: Text(_product.description),
                 trailing: Column(children: <Widget>[
-                  Text("${_product.price.minPrice} $currency", style: Theme.of(context).textTheme.subtitle.apply(fontWeightDelta: 10)),
+                  Text("${_product.price.minPrice.toStringAsFixed(2)} $currency", style: Theme.of(context).textTheme.subtitle.apply(fontWeightDelta: 10)),
                   Text("${_product.amount} ${_product.unit}", style: Theme.of(context).textTheme.caption.apply(fontSizeDelta: 2.5)),
                 ]))
           ],

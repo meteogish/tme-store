@@ -2,23 +2,15 @@ import 'package:tme_store/api/components/http_requester.dart';
 import 'package:tme_store/api/components/products_repository.dart';
 import 'package:tme_store/api/components/signature_creator.dart';
 import 'package:tme_store/components/products_provider.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/material.dart';
 import 'package:tme_store/presentation/products_list.dart';
+import 'package:tme_store/secrets.dart';
 
 void main() {
   runApp(new MaterialApp(
-      title: 'Flutter Demo',
+      title: 'TME.Store',
       theme: new ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or press Run > Flutter Hot Reload in IntelliJ). Notice that the
-        // counter didn't reset back to zero; the application is not restarted.
-        primarySwatch: Colors.lightGreen,
+        primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: "TME Store")));
 }
@@ -34,22 +26,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String _searchText = "";
-  ProductsProvider _productsProvider;
-
-  _MyHomePageState() {
-    _loadSecrets().then((secrets) {
-      var parts = secrets.split("|");
-
-      setState(() {
-        _productsProvider = ProductsProvider(ProductsRepository(
-            SignatureCreator(parts[0], parts[1]), ApiHttpRequester()));
-      });
-    });
-  }
-
-  Future<String> _loadSecrets() async {
-    return await rootBundle.loadString('assets/Secret.txt');
-  }
+  ProductsProvider _productsProvider = 
+    ProductsProvider(
+      ProductsRepository(
+            SignatureCreator(Secrets.secret, Secrets.token), ApiHttpRequester()));
 
   void _setSearch(String s) {
     setState(() {
