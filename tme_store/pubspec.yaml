@@ -20,6 +20,7 @@ dependencies:
   json_annotation: ^2.0.0
   queries: ^0.1.4
   flutter_pagewise: ^0.5.0
+  flutter_launcher_icons: ^0.7.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -30,6 +31,12 @@ dev_dependencies:
     sdk: flutter
   json_serializable: ^2.0.0
   build_runner: ^1.1.2
+
+flutter_icons:
+  android: "tme_logo"
+  ios: true
+  image_path: "assets/tme_logo.jpg"
+
 
 
 # For information on the generic Dart part of this file, see the
@@ -44,9 +51,7 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  assets:
-   - images/lake.jpg
-   - assets/Secret.txt
+  #assets:
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
