@@ -11,14 +11,9 @@ abstract class HttpRequester
 class ApiHttpRequester implements HttpRequester {
   @override
   Future<ApiResponse<T>> post<T>(String url, Map<String, String> values) async {
-    try {
       var response = await http.post(url, body:values);
       var jsonBody = json.decode(response.body);
+      //print(jsonBody);
       return ApiResponse.fromJson<T>(jsonBody);
-    }
-    catch(Exception)
-    {
-      return null;
-    }
   }
 }

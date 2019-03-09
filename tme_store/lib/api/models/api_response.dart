@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tme_store/api/models/api_get_categories_result.dart';
 import 'package:tme_store/api/models/api_get_prices_result_and_stock.dart';
 import 'package:tme_store/api/models/api_search_result.dart';
 
@@ -28,6 +29,8 @@ T _dataFromJson<T>(dynamic json) {
   if (json is! List) {
     switch(T)
     {
+      case ApiGetCategoriesResult:
+        return ApiGetCategoriesResult.fromJson(json) as T;
       case ApiGetPricesAndStockResult:
         return ApiGetPricesAndStockResult.fromJson(json) as T;
       case ApiSearchResult:

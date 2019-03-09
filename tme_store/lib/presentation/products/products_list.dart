@@ -1,23 +1,22 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:tme_store/components/products_provider.dart';
 import 'package:tme_store/models/models.dart';
-import 'package:tme_store/presentation/product_item.dart';
+import 'package:tme_store/models/search_filter.dart';
+import 'package:tme_store/presentation/app_state_provider.dart';
+import 'package:tme_store/presentation/products/product_item.dart';
 import 'package:flutter_pagewise/flutter_pagewise.dart';
+import 'package:tme_store/presentation/products/search_products_bloc.dart';
 
 class ProductsList extends StatelessWidget {
-  ProductsProvider _productsProvider;
   SearchProductsResult _firstResult;
-  String _searchText;
+  SearchFilter _filter;
 
-  ProductsList(this._searchText, this._productsProvider);
+  ProductsList(this._filter);
 
-  Future getFirstResult() async {
-    _firstResult = await _productsProvider.search(_searchText, 1);
+  Future _getFirstResult(SearchProductsBloc bloc) async {
+    _firstResult = await bloc.search(_filter, 1);
   }
 
-  Widget buildList() {
+  Widget buildList(SearchProductsBloc bloc) {
     if (_firstResult.totalCount == 0) {
       return Center(child: Text("Podana fraza nie zostala znaleziona"));
     } else {
@@ -31,10 +30,16 @@ class ProductsList extends StatelessWidget {
           pageFuture: (int pageIndex) async {
             print("Calling pageFuture with page: $pageIndex");
 
-            if (pageIndex <= 1) {
+            if(pageIndex == 0) {
+              return [];
+            }
+
+            if (pageIndex == 1) {
               return _firstResult.products;
             }
-            var response = await _productsProvider.search(_searchText, pageIndex);
+
+            var response = await bloc.search(_filter, pageIndex);
+
             return response.products;
           });
     }
@@ -42,8 +47,9 @@ class ProductsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SearchProductsBloc bloc = AppStateProvider.of(context).searchProductsBloc;
     return FutureBuilder(
-      future: getFirstResult(),
+      future: _getFirstResult(bloc), //0?
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
@@ -54,7 +60,7 @@ class ProductsList extends StatelessWidget {
             if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else {
-              return buildList();
+              return buildList(bloc);
             }
         }
       },

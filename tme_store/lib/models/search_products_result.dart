@@ -5,12 +5,14 @@ class SearchProductsResult {
   final String currency;
   final List<Product> products;
   final int totalCount;
+  final Map<String, int> totalProductsPerCategory;
 
   SearchProductsResult({
     this.priceType,
     this.currency,
     this.products,
-    this.totalCount
+    this.totalCount,
+    this.totalProductsPerCategory
   });
 
   static SearchProductsResult empty() {
