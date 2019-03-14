@@ -37,7 +37,7 @@ class ProductItem extends StatelessWidget {
                       Container(width:50.0, height: 50.0),
                   errorWidget: (context, url, error) => Icon(Icons.cloud_queue),
                 ),
-                title: Text(_product.producer,
+                title: Text(_product.producer ?? '',
                     style: Theme.of(context).textTheme.subhead.apply(fontWeightDelta: 2)),
                 subtitle: Text(_product.description),
                 trailing: Column(children: <Widget>[

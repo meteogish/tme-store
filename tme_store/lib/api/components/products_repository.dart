@@ -4,12 +4,14 @@ import 'package:tme_store/api/components/models/models.dart';
 import 'package:tme_store/api/components/signature_creator.dart';
 import 'package:tme_store/api/models/models.dart';
 import 'package:tme_store/api/models/product_files/api_get_product_files_result.dart';
+import 'package:tme_store/api/models/product_parameters/api_get_product_parameters_result.dart';
 
 class ProductsRepository {
   String _searchEndpoint = "https://api.tme.eu/Products/Search.json";
   String _getPricesAndStocksEndpoint = "https://api.tme.eu/Products/GetPricesAndStocks.json";
   String _getCategoriesEndpoint = "https://api.tme.eu/Products/GetCategories.json";
   String _getProductFilesEndpoint = "https://api.tme.eu/Products/GetProductsFiles.json";
+  String _getProductParametersEndpoint = "https://api.tme.eu/Products/GetParameters.json";
 
   final SignatureCreator _signatureCreator;
   final HttpRequester _requester;
@@ -17,6 +19,15 @@ class ProductsRepository {
   RequestFilter _defaultFilter = RequestFilter(country: "PL", language: "PL");
 
   ProductsRepository(this._signatureCreator, this._requester);
+
+  Future<ApiGetProductParametersResult> getProductsParameters( 
+      List<String> symbols, 
+      {RequestFilter filter}) async {
+
+    var values = _combineValues(filter ?? _defaultFilter, symbols: symbols);
+    
+    return (await _createSignatureAndMakeResponse<ApiGetProductParametersResult>(_getProductParametersEndpoint, values))?.data;
+  }
 
   Future<ApiGetProductFilesResult> getProductsFiles( 
       List<String> symbols, 

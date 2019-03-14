@@ -3,6 +3,7 @@ import 'package:tme_store/api/models/api_get_categories_result.dart';
 import 'package:tme_store/api/models/api_get_prices_result_and_stock.dart';
 import 'package:tme_store/api/models/api_search_result.dart';
 import 'package:tme_store/api/models/product_files/api_get_product_files_result.dart';
+import 'package:tme_store/api/models/product_parameters/api_get_product_parameters_result.dart';
 
 part 'api_response.g.dart';
 
@@ -37,6 +38,8 @@ T _dataFromJson<T>(dynamic json) {
         return ApiSearchResult.fromJson(json) as T;
       case ApiGetProductFilesResult:
         return ApiGetProductFilesResult.fromJson(json) as T;
+      case ApiGetProductParametersResult:
+        return ApiGetProductParametersResult.fromJson(json) as T;
       default:
         throw "Unknown ApiResponse Data type.";
     }
