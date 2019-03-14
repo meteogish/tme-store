@@ -17,4 +17,4 @@ ApiGetProductFilesResultItem _$ApiGetProductFilesResultItemFromJson(
 
 Map<String, dynamic> _$ApiGetProductFilesResultItemToJson(
         ApiGetProductFilesResultItem instance) =>
-    <String, dynamic>{'Symbol': instance.symbol, 'Files ': instance.file};
+    <String, dynamic>{'Symbol': instance.symbol, 'Files': instance.file};
