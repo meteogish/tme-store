@@ -3,9 +3,20 @@ import 'package:tme_store/api/components/http_requester.dart';
 import 'package:tme_store/api/components/products_repository.dart';
 import 'package:tme_store/api/components/signature_creator.dart';
 import 'package:tme_store/api/models/models.dart';
+import 'package:tme_store/api/models/product_files/api_get_product_files_result.dart';
 import 'package:tme_store/secrets.dart';
 
 void main() {
+
+  test("GetProductFiles integration test", () async {
+    print("Started");
+
+    var context = ProductsRepository(
+        SignatureCreator(Secrets.secret, Secrets.token), ApiHttpRequester());
+    ApiGetProductFilesResult result = await context.getProductsFiles(["PLED-HOLDER-WH", "PLED-HOLDER-BK", "FIX-LED-6501"]);
+    expect(result.products.length, 3);
+  });
+
   test("GetPricesAndStocks integration test", () async {
     print("Started");
 
