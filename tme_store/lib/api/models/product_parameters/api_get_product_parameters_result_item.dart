@@ -8,14 +8,11 @@ class ApiGetProductParametersResultItem {
   @JsonKey(name: 'Symbol')
   final String symbol;
 
-  @JsonKey(name: 'Language')
-  final String language;
-
   @JsonKey(name: 'ParameterList')
   final List<ApiProductParameter> parameters;
 
   ApiGetProductParametersResultItem(
-      {this.symbol, this.language, this.parameters});
+      {this.symbol, this.parameters});
 
   static ApiGetProductParametersResultItem fromJson(
           Map<String, dynamic> json) =>

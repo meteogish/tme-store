@@ -8,7 +8,10 @@ class ApiGetProductParametersResult {
   @JsonKey(name: 'ProductList')
   final List<ApiGetProductParametersResultItem> products;
 
-  ApiGetProductParametersResult(this.products);
+  @JsonKey(name: 'Language')
+  final String language;
+
+  ApiGetProductParametersResult(this.products, this.language);
 
   static ApiGetProductParametersResult fromJson(Map<String, dynamic> json) =>
       _$ApiGetProductParametersResultFromJson(json);
